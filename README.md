@@ -3,7 +3,8 @@
 ## Database Schema Design
 
 
-<img width="799" alt="Screen Shot 2022-11-18 at 4 07 19 PM" src="https://user-images.githubusercontent.com/107008372/202822882-d740f9f8-07ee-4670-9c1d-abed48f26ce6.png">
+<img width="742" alt="airbnb_dbdiagram" src="https://user-images.githubusercontent.com/107008372/203441443-7f5eeab3-0d6a-49bc-8c1c-173e963313a6.png">
+
 
 
 
