@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-<<<<<<< HEAD
+
 <img width="799" alt="Screen Shot 2022-11-18 at 4 07 19 PM" src="https://user-images.githubusercontent.com/107008372/202822882-d740f9f8-07ee-4670-9c1d-abed48f26ce6.png">
 
 
