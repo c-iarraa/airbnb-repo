@@ -24,10 +24,7 @@ module.exports = {
       url: {
         allowNull: false,
         type: Sequelize.STRING,
-        unique: true,
-        validate: {
-          isUrl: true
-        }
+        unique: true
       },
       preview: {
         allowNull: false,
