@@ -8,31 +8,34 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    options.tableName = 'SpotImages';
+    options.tableName = 'Bookings';
     return queryInterface.bulkInsert(options, [
       {
         spotId: 1,
-        url: 'https://i.ytimg.com/vi/5nCEUz4bpN0/maxresdefault.jpg',
-        preview: true,
+        userId: 1,
+        startDate: '10-10-2022',
+        endDate: '10-15-2022',
       },
       {
         spotId: 2,
-        url: 'https://static.wikia.nocookie.net/disney/images/7/7f/Mickey_Mouse_Clubhouse_theme.png/revision/latest?cb=20180506175201',
-        preview: true,
+        userId: 2,
+        startDate: '11-11-2022',
+        endDate: '11-16-2022',
       },
       {
         spotId: 3,
-        url: 'https://preview.redd.it/u3rj7kign7o21.jpg?auto=webp&s=ec254b7cc12f391eb8d6c1a7380eef2aa786213e',
-        preview: true,
+        userId: 3,
+        startDate: '12-12-2022',
+        endDate: '12-17-2022',
       }
     ], {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    options.tableName = 'SpotImages';
+    options.tableName = 'Bookings';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3] }
+      spotId: { [Op.in]: [1, 2, 3, 4] }
     }, {});
   }
 };
