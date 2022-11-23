@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       User.hasMany(models.Spot, { foreignKey: 'ownerId' });
-      User.hasMany(models.Booking, { foreignKey: 'ownerId' });
+      User.hasMany(models.Booking, { foreignKey: 'userId' });
+      User.hasMany(models.Review, { foreignKey: 'userId' });
     }
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
