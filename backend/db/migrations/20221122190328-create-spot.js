@@ -19,7 +19,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'Users' },
-        onDelete: 'cascade'
+        onDelete: 'CASCADE'
       },
       address: {
         allowNull: false,
