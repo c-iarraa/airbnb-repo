@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'production') {
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  up: async (queryInterFace, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
     options.tableName = 'Spots'
     return queryInterface.bulkInsert(options, [
     {
@@ -24,18 +24,6 @@ module.exports = {
     },
     {
       ownerId: 2,
-      address: '28394 Clearbrook Circle',
-      city: 'Hayward',
-      state: 'California',
-      country: 'USA',
-      lat:  37.668819,
-      lng:  -122.080795,
-      name: 'Lightning McQueen',
-      description: 'small, not so cute two bedroom apartment',
-      price: '2,600',
-    },
-    {
-      ownerId: 3,
       address: '74017 Inglewood Street',
       city: 'Hayward',
       state: 'California',
@@ -47,7 +35,7 @@ module.exports = {
       price: '1,500',
     },
     {
-      ownderId: 4,
+      ownerId: 3,
       address: '97943 Hotdiggidydog Road',
       city: 'Hayward',
       state: 'California',
@@ -66,7 +54,7 @@ down: async (queryInterface, Sequelize) => {
   options.tableName = 'Spots';
   const Op = Sequelize.Op;
   return queryInterface.bulkDelete(options, {
-    address: { [Op.in]: ['24025 La Paz Way', '28394 Clearbrook Circle', '74017 Inglewood Street', '97943 Hotdiggidydog Road'] }
+    address: { [Op.in]: ['24025 La Paz Way', '74017 Inglewood Street', '97943 Hotdiggidydog Road'] }
   }, {});
 }
 };
