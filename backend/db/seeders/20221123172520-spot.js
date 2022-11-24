@@ -20,7 +20,7 @@ module.exports = {
       lng: -122.0994482,
       name: 'Tow Mater',
       description: 'small, affordable, and cute little townhouse',
-      price: '1,400',
+      price: 1400,
     },
     {
       ownerId: 2,
@@ -32,7 +32,7 @@ module.exports = {
       lng:  -122.080795,
       name: 'Doc Hudson',
       description: 'small, not so cute two bedroom apartment',
-      price: '1,500',
+      price: 1500,
     },
     {
       ownerId: 3,
@@ -44,7 +44,7 @@ module.exports = {
       lng:  -122.080795,
       name: 'Mickey Mouse',
       description: 'silly, little goofy house unique in its own way',
-      price: '2,600',
+      price: 2600
     },
   ]);
 },
