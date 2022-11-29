@@ -18,7 +18,7 @@ module.exports = {
       {
         spotId: 2,
         url: 'https://static.wikia.nocookie.net/disney/images/7/7f/Mickey_Mouse_Clubhouse_theme.png/revision/latest?cb=20180506175201',
-        preview: true,
+        preview: false,
       },
       {
         spotId: 3,
