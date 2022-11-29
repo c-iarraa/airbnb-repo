@@ -256,14 +256,14 @@ router.post('/:spotId/reviews', requireAuth, async(req,res) => {
             })
         }
 
-        for(let review of currentSpotWhere){
-            if(review.userId === currentUser){
-                res.status(403).json({
-                    "message": "User already has a review for this spot",
-                    "statusCode": 403
-                })
-            }
-        }
+        // for(let review of currentSpotWhere){
+        //     if(review.userId === currentUser){
+        //         res.status(403).json({
+        //             "message": "User already has a review for this spot",
+        //             "statusCode": 403
+        //         })
+        //     }
+        // }
 
     if (!stars || !review) {
         res.status(400).json({
