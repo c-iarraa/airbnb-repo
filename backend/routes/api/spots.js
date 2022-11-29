@@ -256,14 +256,14 @@ router.post('/:spotId/reviews', requireAuth, async(req,res) => {
             })
         }
 
-        // for(let review of currentSpotWhere){
-        //     if(review.userId === currentUser){
-        //         res.status(403).json({
-        //             "message": "User already has a review for this spot",
-        //             "statusCode": 403
-        //         })
-        //     }
-        // }
+        for(let review of currentSpotWhere){
+            if(review.userId === currentUser){
+                res.status(403).json({
+                    "message": "User already has a review for this spot",
+                    "statusCode": 403
+                })
+            }
+        }
 
     if (!stars || !review) {
         res.status(400).json({
@@ -293,7 +293,7 @@ router.post('/:spotId/images', requireAuth, async(req, res) => {
 
     const spot = await Spot.findByPk(spotId)
         if(!spot){
-            res.statuus(404).json(
+            res.status(404).json(
             {
                 message: "Spot couldn't be found",
                 statusCode: 404
@@ -476,6 +476,14 @@ router.get("/:spotId", requireAuth, async(req, res) => {
             }
         ]
     });
+
+    if(!selectedSpot){
+        res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          })
+    }
+
     const jsonSelectedSpot = selectedSpot.toJSON()
 
     jsonSelectedSpot.SpotImages.forEach(el => {
@@ -515,225 +523,225 @@ router.get("/:spotId", requireAuth, async(req, res) => {
 // --------------------------------------------------------------------------------------------------
 
 // GET ALL SPOTS
-// router.get("/",  async (req, res, next) => {
-//     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query
+router.get("/",  async (req, res, next) => {
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query
 
-//     let errorsObj = {}
-//     let errorMarker = false
+    let errorsObj = {}
+    let errorMarker = false
 
-//     if (page && page < 1){
-//         errorsObj.page = "Page must be greater than or equal to 1"
-//         errorMarker = true
-//     }
+    if (page && page < 1){
+        errorsObj.page = "Page must be greater than or equal to 1"
+        errorMarker = true
+    }
 
-//     if (page && !Number.isInteger(parseInt(page))){
-//         errorsObj.page = "Page must be greater than or equal to 1"
-//         errorMarker = true
-//     }
+    if (page && !Number.isInteger(parseInt(page))){
+        errorsObj.page = "Page must be greater than or equal to 1"
+        errorMarker = true
+    }
 
-//     if (size && size < 1){
-//         errorsObj.size = "Size must be greater than or equal to 1"
-//         errorMarker = true
-//     }
+    if (size && size < 1){
+        errorsObj.size = "Size must be greater than or equal to 1"
+        errorMarker = true
+    }
 
-//     if (size && !Number.isInteger(parseInt(size))){
-//         errorsObj.size = "Size must be greater than or equal to 1"
-//         errorMarker = true
-//     }
+    if (size && !Number.isInteger(parseInt(size))){
+        errorsObj.size = "Size must be greater than or equal to 1"
+        errorMarker = true
+    }
 
-//     if (maxLat && maxLat.indexOf('.') === -1){
-//         errorsObj.maxLat = "Maximum latitude is invalid"
-//         errorMarker = true
-//     }
+    if (maxLat && maxLat.indexOf('.') === -1){
+        errorsObj.maxLat = "Maximum latitude is invalid"
+        errorMarker = true
+    }
 
-//     if (maxLat && !Number.isInteger(parseInt(maxLat))){
-//         errorsObj.minLat = "Maximum latitude is invalid"
-//         errorMarker = true
-//     }
+    if (maxLat && !Number.isInteger(parseInt(maxLat))){
+        errorsObj.minLat = "Maximum latitude is invalid"
+        errorMarker = true
+    }
 
-//     if (minLat && !Number.isInteger(parseInt(minLat))){
-//         errorsObj.minLat = "Minimum latitude is invalid"
-//         errorMarker = true
-//     }
+    if (minLat && !Number.isInteger(parseInt(minLat))){
+        errorsObj.minLat = "Minimum latitude is invalid"
+        errorMarker = true
+    }
 
-//     if (minLat && minLat.indexOf('.') === -1){
-//         errorsObj.minLat = "Minimum latitude is invalid"
-//         errorMarker = true
-//     }
+    if (minLat && minLat.indexOf('.') === -1){
+        errorsObj.minLat = "Minimum latitude is invalid"
+        errorMarker = true
+    }
 
-//     if (minLng && minLng.indexOf('.') === -1){
-//         errorsObj.minLng = "Minimum longitude is invalid"
-//         errorMarker = true
-//     }
+    if (minLng && minLng.indexOf('.') === -1){
+        errorsObj.minLng = "Minimum longitude is invalid"
+        errorMarker = true
+    }
 
-//     if (minLng && !Number.isInteger(parseInt(minLng))){
-//         errorsObj.minLng = "Minimum longitude is invalid"
-//         errorMarker = true
-//     }
+    if (minLng && !Number.isInteger(parseInt(minLng))){
+        errorsObj.minLng = "Minimum longitude is invalid"
+        errorMarker = true
+    }
 
-//     if (maxLng && maxLng.indexOf('.') === -1){
-//         errorsObj.maxLng = "Maximum longitude is invalid"
-//         errorMarker = true
-//     }
+    if (maxLng && maxLng.indexOf('.') === -1){
+        errorsObj.maxLng = "Maximum longitude is invalid"
+        errorMarker = true
+    }
 
-//     if (maxLng && !Number.isInteger(parseInt(maxLng))){
-//         errorsObj.maxLng = "Maximum longitude is invalid"
-//         errorMarker = true
-//     }
+    if (maxLng && !Number.isInteger(parseInt(maxLng))){
+        errorsObj.maxLng = "Maximum longitude is invalid"
+        errorMarker = true
+    }
 
-//     if (minPrice && parseInt(minPrice) <= 0){
-//         errorsObj.minPrice = "Minimum price must be greater than or equal to 0"
-//         errorMarker = true
-//     }
+    if (minPrice && parseInt(minPrice) <= 0){
+        errorsObj.minPrice = "Minimum price must be greater than or equal to 0"
+        errorMarker = true
+    }
 
-//     if (minPrice && !Number.isInteger(parseInt(minPrice))){
-//         errorsObj.minPrice = "Minimum price must be greater than or equal to 0"
-//         errorMarker = true
-//     }
+    if (minPrice && !Number.isInteger(parseInt(minPrice))){
+        errorsObj.minPrice = "Minimum price must be greater than or equal to 0"
+        errorMarker = true
+    }
 
-//     if (maxPrice && parseInt(maxPrice) <= 0){
-//         errorsObj.maxPrice = "Maximum price must be greater than or equal to 0"
-//         errorMarker = true
-//     }
+    if (maxPrice && parseInt(maxPrice) <= 0){
+        errorsObj.maxPrice = "Maximum price must be greater than or equal to 0"
+        errorMarker = true
+    }
 
-//     if (maxPrice && !Number.isInteger(parseInt(maxPrice))){
-//         errorsObj.maxPrice = "Maximum price must be greater than or equal to 0"
-//         errorMarker = true
-//     }
+    if (maxPrice && !Number.isInteger(parseInt(maxPrice))){
+        errorsObj.maxPrice = "Maximum price must be greater than or equal to 0"
+        errorMarker = true
+    }
 
-//     if (errorMarker === true){
-//         return res.status(400).json({
-//             message: "Validation Error",
-//             "statusCode": 400,
-//             errorsObj
-//           });
-//     };
+    if (errorMarker === true){
+        return res.status(400).json({
+            message: "Validation Error",
+            "statusCode": 400,
+            errorsObj
+          });
+    };
 
-//     if (!page){
-//         page = 1
-//     };
+    if (!page){
+        page = 1
+    };
 
-//     if (page >= 10){
-//         page = 10
-//     };
+    if (page >= 10){
+        page = 10
+    };
 
-//     if (!size || size >= 20){
-//         size = 20
-//     };
+    if (!size || size >= 20){
+        size = 20
+    };
 
-//     let paginationObj = {};
+    let paginationObj = {};
 
-//     page = parseInt(page)
-//     size = parseInt(size)
+    page = parseInt(page)
+    size = parseInt(size)
 
-//     if (page >= 1 && size >= 1){
-//         paginationObj.limit = size,
-//         paginationObj.offset = size*(page-1)
-//     }
+    if (page >= 1 && size >= 1){
+        paginationObj.limit = size,
+        paginationObj.offset = size*(page-1)
+    }
 
-//     let where = {}
+    let where = {}
 
-//     if (maxLat && minLat){
-//         where.lat = {
-//             [Op.between]: [minLat, maxLat]
-//         }
-//     }
+    if (maxLat && minLat){
+        where.lat = {
+            [Op.between]: [minLat, maxLat]
+        }
+    }
 
-//     if (maxLat && !minLat){
-//         where.lat = {
-//             [Op.lte]: maxLat
-//         }
-//     }
+    if (maxLat && !minLat){
+        where.lat = {
+            [Op.lte]: maxLat
+        }
+    }
 
-//     if (minLat && !maxLat){
-//         where.lat = {
-//             [Op.gte]: minLat
-//         }
-//     }
+    if (minLat && !maxLat){
+        where.lat = {
+            [Op.gte]: minLat
+        }
+    }
 
-//     if (maxLng && minLng){
-//         where.lng = {
-//             [Op.between]: [minLng, maxLng]
-//         }
-//     }
+    if (maxLng && minLng){
+        where.lng = {
+            [Op.between]: [minLng, maxLng]
+        }
+    }
 
-//     if (maxLng && !minLng){
-//         where.lng = {
-//             [Op.lte]: maxLng
-//         }
-//     }
+    if (maxLng && !minLng){
+        where.lng = {
+            [Op.lte]: maxLng
+        }
+    }
 
-//     if (minLng && ! maxLat){
-//         where.lng = {
-//             [Op.gte]: minLng
-//         }
-//     }
+    if (minLng && ! maxLat){
+        where.lng = {
+            [Op.gte]: minLng
+        }
+    }
 
-//     if (maxPrice && minPrice){
-//         where.price = {
-//             [Op.between]: [minPrice, maxPrice]
-//         }
-//     }
+    if (maxPrice && minPrice){
+        where.price = {
+            [Op.between]: [minPrice, maxPrice]
+        }
+    }
 
-//     if (maxPrice && !minPrice){
-//         where.price = {
-//             [Op.lte]: maxPrice
-//         }
-//     }
+    if (maxPrice && !minPrice){
+        where.price = {
+            [Op.lte]: maxPrice
+        }
+    }
 
-//     if (minPrice && !maxPrice){
-//         where.price = {
-//             [Op.gte]: minPrice
-//         }
-//     }
+    if (minPrice && !maxPrice){
+        where.price = {
+            [Op.gte]: minPrice
+        }
+    }
 
-//     console.log(where)
-//   let spots = await Spot.findAll({
-//     include: [
-//         {
-//         model: Review
-//         },
-//         {
-//         model: SpotImage
-//     }
-// ],
-//     ...paginationObj
-//   });
+    console.log(where)
+  let spots = await Spot.findAll({
+    include: [
+        {
+        model: Review
+        },
+        {
+        model: SpotImage
+    }
+],
+    ...paginationObj
+  });
 
-//     // spots.toJSON()
-//     // console.log(spots)
-//   let spotsList = []
-//   spots.forEach(spot => {
-//     spotsList.push(spot.toJSON())
-//   })
+    // spots.toJSON()
+    // console.log(spots)
+  let spotsList = []
+  spots.forEach(spot => {
+    spotsList.push(spot.toJSON())
+  })
 
-//   spotsList.forEach(spot => {
-//       let totalStars = 0
-//     spot.Reviews.forEach(review => {
-//         totalStars += review.stars
-//     })
-//     spot.avgRating = totalStars/spot.Reviews.length
-//     delete spot.Reviews
-//   })
+  spotsList.forEach(spot => {
+      let totalStars = 0
+    spot.Reviews.forEach(review => {
+        totalStars += review.stars
+    })
+    spot.avgRating = totalStars/spot.Reviews.length
+    delete spot.Reviews
+  })
 
-//   spotsList.forEach(spot => {
-//     spot.SpotImages.forEach(image => {
-//         if (image.preview === true){
-//             spot.previewImage = image.url
-//         }
-//     })
-//     if (!spot.previewImage){
-//         spot.previewImage = 'No preview image found'
-//     }
-//     delete spot.SpotImages
-//   })
+  spotsList.forEach(spot => {
+    spot.SpotImages.forEach(image => {
+        if (image.preview === true){
+            spot.previewImage = image.url
+        }
+    })
+    if (!spot.previewImage){
+        spot.previewImage = 'No preview image found'
+    }
+    delete spot.SpotImages
+  })
 
-//   return res.json({
-//     Spots: spotsList,
-//     page,
-//     size
-//   });
-// });
+  return res.json({
+    Spots: spotsList,
+    page,
+    size
+  });
+});
 
 
 router.get("/", async(req, res) => {
