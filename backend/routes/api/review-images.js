@@ -32,17 +32,17 @@ router.delete("/:imageId", requireAuth, async(req, res) => {
           });
     };
 
-      const review = await Review.findOne({
-        where: {
-          userId: image.reviewId
-        }
-      })
+    //   const review = await Review.findOne({
+    //     where: {
+    //       userId: image.reviewId
+    //     }
+    //   })
 
-      if(review.userId !== req.user.id){
-        const err = new Error('You are not the owner of this spot')
-        err.status = 403
-        throw err
-      }
+    //   if(review.userId !== req.user.id){
+    //     const err = new Error('You are not the owner of this spot')
+    //     err.status = 403
+    //     throw err
+    //   }
 
     await image.destroy();
     return res.status(200).json({
