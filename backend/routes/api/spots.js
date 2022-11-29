@@ -751,55 +751,57 @@ router.get("/", async(req, res) => {
         ]
     });
 
-    // spots.toJSON()
-    // console.log(spots)
-    let spotsList = [];
-    spots.forEach(spot => {
-        spotsList.push(spot.toJSON()); // basically converts to javascript so we can edit/make changes to code
-    });
+    // // spots.toJSON()
+    // // console.log(spots)
+    // let spotsList = [];
+    // spots.forEach(spot => {
+    //     spotsList.push(spot.toJSON()); // basically converts to javascript so we can edit/make changes to code
+    // });
 
-    spotsList.forEach(spot => {
-        const stars = [];
-        if(!spot.Reviews.length) {
-            spots.ratings = "No ratings at the moment"
-            // delete spots.Reviews
-        }
+    // spotsList.forEach(spot => {
+    //     const stars = [];
+    //     if(!spot.Reviews.length) {
+    //         spots.ratings = "No ratings at the moment"
+    //         // delete spots.Reviews
+    //     }
 
-        spot.Reviews.forEach(el => {
-            // console.log(el.stars)
-            // const avgRating = [];
-            if (el.stars) {
-                stars.push(el.stars)
-            } else {
-                spots.avgRating = 'No Ratings Yet'
-            }
-            // console.log(stars)
-            let total = stars.reduce((previous, current) => previous + current );
-            // console.log(total/stars.length)
-            spot.avgRating = total/stars.length
-            if(!spots.avgRating){
-                spots.avgRating = 'There are no ratings for this location at this time'
-              }
-        })
-        delete spot.Reviews
-    });
+    //     spot.Reviews.forEach(el => {
+    //         // console.log(el.stars)
+    //         // const avgRating = [];
+    //         if (el.stars) {
+    //             stars.push(el.stars)
+    //         } else {
+    //             spots.avgRating = 'No Ratings Yet'
+    //         }
+    //         // console.log(stars)
+    //         let total = stars.reduce((previous, current) => previous + current );
+    //         // console.log(total/stars.length)
+    //         spot.avgRating = total/stars.length
+    //         if(!spots.avgRating){
+    //             spots.avgRating = 'There are no ratings for this location at this time'
+    //           }
+    //     })
+    //     delete spot.Reviews
+    // });
 
-    // preview image code
-    spotsList.forEach(spot => {
-        spot.SpotImages.forEach(image => {
-            // console.log(image.preview)
-            if (image.preview === true) {
-                // console.log(image)
-                spot.previewImage = image.url
-            };
-        });
+    // // preview image code
+    // spotsList.forEach(spot => {
+    //     spot.SpotImages.forEach(image => {
+    //         // console.log(image.preview)
+    //         if (image.preview === true) {
+    //             // console.log(image)
+    //             spot.previewImage = image.url
+    //         };
+    //     });
 
-        if (!spot.previewImage) {
-            spot.previewImage = "no preview image found"
-        }
-        delete spot.SpotImages
-    });
-    res.json(spotsList);
+    //     if (!spot.previewImage) {
+    //         spot.previewImage = "no preview image found"
+    //     }
+    //     delete spot.SpotImages
+    // });
+    // res.json(spotsList);
+    res.json(spots);
+
 });
 
 
