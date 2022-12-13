@@ -3,7 +3,7 @@ a:visited { text-decoration: none; }
 
 .container{
 display: grid;
-/* grid-template-columns: repeat(auto-fit, minmax(20px, 1fr)); */
+grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
 grid-gap: 30px;
 }
 

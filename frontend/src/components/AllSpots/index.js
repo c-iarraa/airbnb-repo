@@ -30,7 +30,8 @@ function AllSpots(){
                  <NavLink to={`/spots/${el.id}`}>
                     <img src={el.previewImage} className='spotImg'></img>
                     <h4>{el.city}, {el.state}</h4>
-                    <h3>${el.price} night</h3>
+                    <h4>{el.avgRating}</h4>
+                    <h4>${el.price} night</h4>
                 </NavLink>
                 </div>
             </ul>
