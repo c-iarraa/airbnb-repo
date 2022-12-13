@@ -13,7 +13,6 @@ function AllSpots(){
         return state.spots
     });
 
-    // hello
 
     const spotArr = Object.values(sessionSpot)
 
@@ -36,7 +35,7 @@ function AllSpots(){
                 </NavLink>
                 </div>
             </ul>
-            ))};
+            ))}
         </nav>
     );
   }

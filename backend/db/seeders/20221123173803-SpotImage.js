@@ -12,17 +12,17 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         spotId: 1,
-        url: 'https://artincontext.org/wp-content/uploads/2022/07/Biggest-House-in-the-World-848x530.jpg',
+        url: 'https://i.ytimg.com/vi/5nCEUz4bpN0/maxresdefault.jpg',
         preview: true,
       },
       {
         spotId: 2,
-        url: 'https://i.pinimg.com/736x/ae/6f/ac/ae6fac72fd18b901ef70682f66c6a800.jpg',
+        url: 'https://static.wikia.nocookie.net/mickey-and-friends/images/a/ab/Clubhouse.jpg/revision/latest?cb=20180531204618',
         preview: false,
       },
       {
         spotId: 3,
-        url: 'https://943thepoint.com/files/2022/01/attachment-5-1-1.JPG',
+        url: 'https://preview.redd.it/u3rj7kign7o21.jpg?auto=webp&s=ec254b7cc12f391eb8d6c1a7380eef2aa786213e',
         preview: true,
       }
     ], {});
