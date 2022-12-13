@@ -19,7 +19,7 @@ module.exports = {
         {
           spotId: 1,
           userId: 3,
-          review: 'oved it, everything was perfect. I will be coming back here sooner or later',
+          review: 'loved it, everything was perfect. I will be coming back here sooner or later',
           stars: 3
         },
         {

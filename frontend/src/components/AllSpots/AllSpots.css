@@ -1,0 +1,15 @@
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+
+.container{
+display: grid;
+/* grid-template-columns: repeat(auto-fit, minmax(20px, 1fr)); */
+grid-gap: 30px;
+}
+
+
+.spotImg{
+    width: 250px;
+    border-radius: 7px;
+    height: 233px;
+}
