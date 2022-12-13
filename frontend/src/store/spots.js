@@ -3,6 +3,12 @@
 // - [ DONE ] In store/index.js, import new spotReducer and set it as the value for a new slice of state called (spots) ex. (Spots: spotReducer)
 
 export const LOAD_SPOTS = "spots/GETALLSPOTS";
+export const LOAD_SPECIFIC_SPOT = "spots/GETONESPOT";
+
+const loadSpecificSpot = (spot) => ({
+    type: LOAD_SPECIFIC_SPOT,
+    spot
+});
 
 const load = (spots) => ({
   type: LOAD_SPOTS,
@@ -10,6 +16,18 @@ const load = (spots) => ({
 });
 
 // - [ DONE ] Create and Export the Thunkalicious action creator (this is to fetch and parse your data from your backend database)
+// Create the action creator for one spot
+// thunk action creator
+export const getSpot = (spotId) => async (dispatch) =>{
+    const response = await fetch(`/api/spots/${spotId}`)
+
+    if (response.ok){
+     // Constant variable to specify the action type (“spots/getOneSpot”)
+      const spot = await response.json()
+      dispatch(loadSpecificSpot(spot))
+    }
+  }
+
 // Create the action creator for all spots
 // thunk action creator
 export const getSpots = () => async (dispatch) =>{
