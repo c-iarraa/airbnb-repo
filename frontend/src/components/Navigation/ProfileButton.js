@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
+import DemoUserModal from '../DemoUserModal';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import CreateSpotModal from '../CreateSpotModal';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -51,6 +53,13 @@ function ProfileButton({ user }) {
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
             <li>
+              <OpenModalMenuItem
+              itemText="Create your spot"
+              onItemClick={closeMenu}
+              modalComponent={<CreateSpotModal />}
+              />
+            </li>
+            <li>
               <button onClick={logout}>Log Out</button>
             </li>
           </>
@@ -65,6 +74,11 @@ function ProfileButton({ user }) {
               itemText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
+            />
+            <OpenModalMenuItem
+              itemText="Demo User Login"
+              onItemClick={closeMenu}
+              modalComponent={<DemoUserModal />}
             />
           </>
         )}

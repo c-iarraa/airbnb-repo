@@ -5,6 +5,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import SpotDetails from './components/SpotDetails';
+import EditSpot from './components/EditSpot';
+import CreateSpotModal from './components/CreateSpotModal';
+import DeleteSpot from './components/DeleteSpot';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,14 +20,23 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-        <Switch>
-           <Route
-        path={["/", "/spots", "/spot/:spotId"]}
-        exact
-      >
-         <AllSpots/>
-      </Route>
-        </Switch>
+         <Switch>
+         <Route exact path='/'>
+           <AllSpots />
+         </Route>
+         <Route exact path='/spots/:spotId/edit'>
+           <EditSpot />
+         </Route>
+         <Route exact path='/api/spots/:spotId'>
+           <SpotDetails />
+         </Route>
+         <Route exact path='/'>
+           <CreateSpotModal />
+         </Route>
+         {/* <Route exact path='/api/spots/:spotId'>
+           <DeleteSpot />
+         </Route> */}
+       </Switch>
       )}
     </>
   );

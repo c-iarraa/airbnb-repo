@@ -10,7 +10,7 @@ function AllSpots(){
     const dispatch = useDispatch();
     // Find data with useSelector in your component
     const sessionSpot = useSelector(state => {
-        return state.spots
+        return state.spots.allSpots
     });
 
 
@@ -26,8 +26,8 @@ function AllSpots(){
         <nav className='container'>
             {spotArr.map(el => (
             <ul>
-                <div id='spotCard'>
-                 <NavLink to={`/spots/${el.id}`}>
+                <div id='spotCard' key={el.id}>
+                 <NavLink to={`api/spots/${el.id}`}>
                     <img src={el.previewImage} className='spotImg'></img>
                     <h4>{el.city}, {el.state}</h4>
                     <h4>{el.avgRating}</h4>

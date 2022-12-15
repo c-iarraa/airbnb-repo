@@ -321,10 +321,10 @@ router.post('/:spotId/images', requireAuth, async(req, res) => {
 
 // EDIT A SPOT
 router.put('/:spotId', requireAuth, async (req, res)=> {
-    const spotId = req.params.spotId
+    const userId = req.params.spotId
     const {address, city, state, country, lat, lng, name, description, price} = req.body;
     const spotDetails = [address, city, state, country, lat, lng, name, description, price];
-    const specificSpot = await Spot.findByPk(spotId);
+    const specificSpot = await Spot.findByPk(userId)
 
     spotDetails.forEach(el => {
         if (!el) {
@@ -346,13 +346,20 @@ router.put('/:spotId', requireAuth, async (req, res)=> {
         }
     });
 
-
     if(!specificSpot){
         res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
     }
+
+    if(currentUserId !== specificSpot.ownerId){
+        const err = new Error('You are not authorized to edit this spot');
+        err.status = 403
+        throw err;
+    }
+
+
 
     specificSpot.set({address, city, state, country, lat, lng, name, description, price})
     specificSpot.save();
@@ -462,7 +469,7 @@ router.get('/current', requireAuth, async(req,res) => {
 // --------------------------------------------------------------------------------------------------
 
 //GET DETAILS OF A SPOT FROM AN ID
-router.get("/:spotId", requireAuth, async(req, res) => {
+router.get("/:spotId", async(req, res) => {
     const selectedSpot = await Spot.findByPk(req.params.spotId, {
         include: [
             {

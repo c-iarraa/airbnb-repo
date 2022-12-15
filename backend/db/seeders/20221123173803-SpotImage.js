@@ -17,8 +17,8 @@ module.exports = {
       },
       {
         spotId: 2,
-        url: 'https://static.wikia.nocookie.net/mickey-and-friends/images/a/ab/Clubhouse.jpg/revision/latest?cb=20180531204618',
-        preview: false,
+        url: 'https://i.ytimg.com/vi/57oU-xqiXek/maxresdefault.jpg',
+        preview: true,
       },
       {
         spotId: 3,
