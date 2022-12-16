@@ -5,9 +5,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import SpotDetails from './components/SpotDetails';
-import EditSpot from './components/EditSpot';
+import UpdateSpot from './components/UpdateSpot';
 import CreateSpotModal from './components/CreateSpotModal';
-import DeleteSpot from './components/DeleteSpot';
+// import DeleteSpot from './components/DeleteSpot';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ function App() {
            <AllSpots />
          </Route>
          <Route exact path='/spots/:spotId/edit'>
-           <EditSpot />
+           <UpdateSpot />
          </Route>
          <Route exact path='/api/spots/:spotId'>
            <SpotDetails />

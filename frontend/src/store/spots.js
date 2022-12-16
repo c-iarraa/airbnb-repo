@@ -4,12 +4,15 @@
 
 import csrfFetch from './csrf';
 
+// constants to avoid debugging typos
 export const LOAD_SPOTS = "spots/GETALLSPOTS";
 export const LOAD_SPECIFIC_SPOT = "spots/GETONESPOT";
-export const EDIT_SPOT = "spots/EDITSPOT";
+export const UPDATE_SPOT = "spots/UPDATESPOT";
 export const CREATE_SPOT = "spots/CREATESPOT";
 export const REMOVE_SPOT = "spots/REMOVESPOT";
 
+
+// regular action creators
 const remove = (spot) => ({
     type: REMOVE_SPOT,
     spot
@@ -20,8 +23,8 @@ const create = (spot) => ({
     payload: spot
 });
 
-const edit = (spot) => ({
-    type: EDIT_SPOT,
+const update = (spot) => ({
+    type: UPDATE_SPOT,
     spot
 });
 
@@ -35,7 +38,7 @@ const load = (spotList) => ({
   spotList,
 });
 
-// - [ DONE ] Create and Export the Thunkalicious action creator (this is to fetch and parse your data from your backend database)
+// - [ DONE ] Create and Export the Thunk action creator (this is to fetch and parse your data from your backend database)
 // Create the action creator to delete a spot
 // thunk action creator
 export const deleteSpot = (spotId) => async dispatch =>{
@@ -75,7 +78,7 @@ export const createSpot = (spotId) => async dispatch =>{
 
 // Create the action creator to edit a spot
 // thunk action creator
-export const editSpot = (spotId) => async dispatch =>{
+export const updateSpot = (spotId) => async dispatch =>{
     const response = await csrfFetch(`/api/spots/${spotId.id}`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -85,7 +88,7 @@ export const editSpot = (spotId) => async dispatch =>{
     if (response.ok){
      // Constant variable to specify the action type (“spots/editSpot”)
       const spot = await response.json()
-      dispatch(edit(spot))
+      dispatch(update(spot))
       return spot
     }
   }
@@ -117,6 +120,7 @@ export const getSpots = () => async (dispatch) =>{
     }
   }
 
+  // state object
 const initialState = { allSpots: {}, oneSpot: {} };
 
 const spotReducer = (state = initialState, action) => {
@@ -134,19 +138,6 @@ const spotReducer = (state = initialState, action) => {
             return newState
         }
 
-      // case CREATE_SPOT:{
-      //   const newState = { ...state, allSpots: { ...state.allSpots }}
-      //     if (Array.isArray(action.payload)) {
-      //       action.payload.forEach(spot => {
-      //         newState.allSpots[spot.it] = spot;
-      //       })
-      //     } else {
-      //       newState.allSpots[action.payload.id] = action.payload;
-      //     }
-      //     return newState;
-
-      // }
-
       case CREATE_SPOT: {
         const newState = {...state, allSpots: {...state.allSpots}};
         if (Array.isArray (action.payload)) {
@@ -158,7 +149,12 @@ const spotReducer = (state = initialState, action) => {
         }
             return newState
       }
-      // case EDIT_SPOT:
+      case UPDATE_SPOT: {
+        const newState = { ...state, oneSpot: {} };
+        newState.oneSpot = action.oneSpot
+        return newState;
+      }
+
 
 
       // case REMOVE_SPOT:

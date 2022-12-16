@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { editSpot } from '../../store/spots'
+import { updateSpot } from '../../store/spots'
 
 
-const EditSpot  = ({ spot }) => {
+const UpdateSpot  = ({ spot }) => {
     const history = useHistory();
     const { spotId } = useParams();
     const dispatch = useDispatch();
@@ -47,8 +47,8 @@ const EditSpot  = ({ spot }) => {
             lng: 456
         };
 
-    let editedSpot = await dispatch(editSpot(updatingSpot));
-    if (editedSpot) {
+    let updatedSpot = await dispatch(updateSpot(updatingSpot));
+    if (updatedSpot) {
     history.push('/')
     }
   };
@@ -59,7 +59,7 @@ const EditSpot  = ({ spot }) => {
 
 
       return (
-        <section className="edit-form-holder centered middled">
+        <section className="update-form-holder centered middled">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -112,11 +112,11 @@ const EditSpot  = ({ spot }) => {
           placeholder="Price"
           value={price}
           onChange={updatePrice} />
-        <button type="submit">Update Spot</button>
+        <button type="submit">Update</button>
         <button type="button">Cancel</button>
       </form>
     </section>
       )
 }
 
-    export default EditSpot;
+    export default UpdateSpot;

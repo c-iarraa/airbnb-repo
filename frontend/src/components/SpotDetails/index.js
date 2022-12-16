@@ -9,12 +9,15 @@ const SpotDetails = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spotSelector = useSelector(state => state.spots.oneSpot);
+    const sessionId = useSelector(state => state.user) //session user id
 
 
 
     useEffect(() => {
         dispatch(getSpot(spotId))
     }, [spotId]);
+
+
 
     if (!spotSelector.SpotImages) return null;
 
@@ -23,7 +26,7 @@ const SpotDetails = () => {
             <div id='detailsDiv'>
                 <h1 id='title'>{spotSelector.description}</h1>
                 <h4><i class="fa-sharp fa-solid fa-star"></i> {spotSelector.avgStarRating} · {spotSelector.numReviews} review · {spotSelector.city}, {spotSelector.state}, {spotSelector.country}</h4>
-                <div id='spotContainer'>
+                <div id='spotContainer' >
                     {spotSelector.SpotImages.map(el => (<img src={el.url}/>))}
                     <NavLink to={`/spots/${spotSelector.id}/edit`}>Update Spot</NavLink>
                 </div>
