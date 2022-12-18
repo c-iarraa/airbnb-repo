@@ -79,9 +79,11 @@ const SpotDetails = () => {
                     </div>
                     }
                 </div>
-                <div className='review-button'>
-                    <NavLink to={`/spots/${spotId}/review`}>Create A Review</NavLink>
-                </div>
+                {(spotSelector.ownerId !== sessionId) &&
+                    <div className='review-button'>
+                        <NavLink to={`/spots/${spotId}/review`}>Create A Review</NavLink>
+                    </div>
+                }
                 <ul className="spot-reviews">
                     {
                         reviews.map(review => (
