@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createSpot } from '../../store/spots'
+import { createSpot } from '../../store/spots';
+import { useModal } from "../../context/Modal";
+
+
 
 
 const CreateSpotModal = () => {
-    // const spotSelector = useSelector(state => state.spots);
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const [errors, setErrors] = useState([]);
+  // const spotSelector = useSelector(state => state.spots);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [errors, setErrors] = useState([]);
+  const { closeModal } = useModal();
 
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
@@ -19,6 +23,7 @@ const CreateSpotModal = () => {
     const [lng, setLng] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,7 +38,8 @@ const CreateSpotModal = () => {
         lat,
         lng,
         description,
-        price: +price
+        price: +price,
+        imageUrl
       };
       console.log(payload)
 
@@ -42,6 +48,8 @@ const CreateSpotModal = () => {
         history.push(`/`);
         // hideForm();
     };
+
+    closeModal();
   }
 
     // const handleCancelClick = (e) => {
@@ -63,6 +71,7 @@ const CreateSpotModal = () => {
               Name
               <input
                 type="text"
+                placeholder='Name'
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -72,6 +81,7 @@ const CreateSpotModal = () => {
               Address
               <input
                 type="text"
+                placeholder='Address'
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 required
@@ -81,6 +91,7 @@ const CreateSpotModal = () => {
               City
               <input
                 type="text"
+                placeholder='City'
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 required
@@ -90,6 +101,7 @@ const CreateSpotModal = () => {
               State
               <input
                 type="text"
+                placeholder='State'
                 value={state}
                 onChange={(e) => setState(e.target.value)}
                 required
@@ -99,6 +111,7 @@ const CreateSpotModal = () => {
               Country
               <input
                 type="text"
+                placeholder='Country'
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 required
@@ -108,6 +121,7 @@ const CreateSpotModal = () => {
               Lat
               <input
                 type="number"
+                placeholder='Lat'
                 value={lat}
                 onChange={(e) => setLat(e.target.value)}
                 required
@@ -117,6 +131,7 @@ const CreateSpotModal = () => {
               Lng
               <input
                 type="number"
+                placeholder='Lng'
                 value={lng}
                 onChange={(e) => setLng(e.target.value)}
                 required
@@ -126,6 +141,7 @@ const CreateSpotModal = () => {
               Description
               <input
                 type="text"
+                placeholder='Description'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
@@ -135,8 +151,19 @@ const CreateSpotModal = () => {
               Price
               <input
                 type="number"
+                placeholder='Price'
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+                required
+              />
+            </label>
+            <label>
+              Image Url
+              <input
+                type="text"
+                placeholder='Image Url'
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
                 required
               />
             </label>

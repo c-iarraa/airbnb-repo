@@ -54,7 +54,7 @@ function ProfileButton({ user }) {
             <li>{user.email}</li>
             <li>
               <OpenModalMenuItem
-              itemText="Create your spot"
+              itemText="LairBnb your home"
               onItemClick={closeMenu}
               modalComponent={<CreateSpotModal />}
               />

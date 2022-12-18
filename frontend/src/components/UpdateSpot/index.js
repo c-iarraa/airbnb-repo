@@ -19,6 +19,7 @@ const UpdateSpot  = ({ spot }) => {
     const [name, setName] = useState(spotSelector.name);
     const [description, setDescription] = useState(spotSelector.description);
     const [price, setPrice] = useState(spotSelector.price);
+    const [urlImage, setUrlImage] = useState(spotSelector.urlImage);
 
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
@@ -29,6 +30,7 @@ const UpdateSpot  = ({ spot }) => {
     const updateName = (e) => setName(e.target.value);
     const updateDescription = (e) => setDescription(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
+    const updateUrlImage = (e) => setUrlImage(e.target.value);
 
 
     const handleSubmit = async (e) => {
@@ -44,18 +46,19 @@ const UpdateSpot  = ({ spot }) => {
             state,
             country,
             lat: 888,
-            lng: 456
+            lng: 456,
+            urlImage
         };
 
     let updatedSpot = await dispatch(updateSpot(updatingSpot));
     if (updatedSpot) {
-    history.push('/')
+      history.push('/')
     }
   };
 
-//   const handleCancelClick = (e) => {
-//     e.preventDefault();
-//   };
+  // const handleCancelClick = (e) => {
+  //   e.preventDefault();
+  // };
 
 
       return (
@@ -112,8 +115,13 @@ const UpdateSpot  = ({ spot }) => {
           placeholder="Price"
           value={price}
           onChange={updatePrice} />
+          <input
+          type="text"
+          placeholder="Url Image"
+          value={urlImage}
+          onChange={updateUrlImage} />
         <button type="submit">Update</button>
-        <button type="button">Cancel</button>
+        {/* <button type="button" onClick={handleCancelClick}>Cancel</button> */}
       </form>
     </section>
       )

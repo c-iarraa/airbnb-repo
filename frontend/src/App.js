@@ -7,7 +7,9 @@ import AllSpots from "./components/AllSpots";
 import SpotDetails from './components/SpotDetails';
 import UpdateSpot from './components/UpdateSpot';
 import CreateSpotModal from './components/CreateSpotModal';
-// import DeleteSpot from './components/DeleteSpot';
+import ReviewsForSpot from "./components/ReviewsForSpot";
+import CreateAReviewModal from './components/CreateAReviewModal';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -21,10 +23,13 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
          <Switch>
+         <Route exact path='/spots/:spotId/review'>
+           <CreateAReviewModal />
+         </Route>
          <Route exact path='/'>
            <AllSpots />
          </Route>
-         <Route exact path='/spots/:spotId/edit'>
+         <Route exact path='/spots/:spotId/update'>
            <UpdateSpot />
          </Route>
          <Route exact path='/api/spots/:spotId'>
@@ -33,9 +38,9 @@ function App() {
          <Route exact path='/'>
            <CreateSpotModal />
          </Route>
-         {/* <Route exact path='/api/spots/:spotId'>
-           <DeleteSpot />
-         </Route> */}
+         <Route exact path='/spots/:spotId/reviews'>
+           <ReviewsForSpot />
+         </Route>
        </Switch>
       )}
     </>

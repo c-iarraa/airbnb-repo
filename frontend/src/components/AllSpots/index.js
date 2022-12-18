@@ -32,7 +32,7 @@ function AllSpots(){
                     <h4>{el.city}, {el.state}</h4>
                     <h4>{el.avgRating}</h4>
                     <h4>${el.price} night</h4>
-                </NavLink>
+                 </NavLink>
                 </div>
             </ul>
             ))}
