@@ -11,9 +11,9 @@ function Navigation({ isLoaded }){
   return (
     <ul>
       <div className='nav-bar'>
-         <div className='top-left'>
+         {/* <div className='top-left'>
               <img className='airbnb-logo' src='https://seeklogo.com/images/A/airbnb-logo-1D03C48906-seeklogo.com.png' />
-        </div>
+        </div> */}
         <NavLink className='home-button' style={{fontFamily: 'Geneva, Verdana, sans-serif'}} exact to="/">LairBnb</NavLink>
       <div className='top-right'>
         <ul>

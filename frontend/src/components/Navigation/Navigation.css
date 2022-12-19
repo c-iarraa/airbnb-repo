@@ -13,7 +13,7 @@
 .nav-bar{
     display: flex;
     justify-content: space-between;
-    width: 1120px;
+    width: 100%;
     margin: auto;
     margin-top: 25px;
     margin-bottom: 20px;
@@ -28,10 +28,11 @@
 .home-button{
     display: flex;
     align-items: left;
-    color: black;
+    color: #da467d;
+    font-weight: 2000
 
 }
 
-.airbnb-logo{
+/* .airbnb-logo{
     width: 35px;
-}
+} */

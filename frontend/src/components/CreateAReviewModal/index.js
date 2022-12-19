@@ -17,7 +17,7 @@ const CreateReviewModal = () => {
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const { closeModal } = useModal();
-  const {spotForId} = useParams()
+  const {spotId} = useParams()
 
     const [review, setReview] = useState('');
     const [stars, setStars] = useState('');
@@ -45,12 +45,13 @@ const CreateReviewModal = () => {
       // console.log(spotForId)
 
     return dispatch(createReview(spotSelectorId, payload))
+    .then (() => history.push(`/`))
       .catch(async (res) => {
         const data = await res.json();
         if (data.message === '"undefined" is not a valid integer') {
           setErrors('User is only allowed one review per spot')
         };
-        
+
         if (data && data.errors) {
           setErrors(data.errors);
         };

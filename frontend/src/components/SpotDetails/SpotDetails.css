@@ -1,0 +1,104 @@
+#root {
+    margin: 0 auto;
+    width: 1250px;
+    padding-top: 20px;
+    grid-template-columns: repeat(auto-fill, 330px);
+}
+
+.description {
+    color: black;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.specific-spot-img {
+    border-radius: 20px;
+    justify-content: center;
+    width: 900px;
+    height: 500px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+
+}
+
+.above-img {
+    display: flex;
+    flex-direction: column;
+}
+
+.self-checkin {
+    margin: 30px 0px 0px
+}
+
+.checkin-text {
+    color: rgb(120,120,120);
+    font-family: 'Geneva, Verdana, sans-serif';
+    margin: 5px 12px 0px
+}
+
+.owner-superhost {
+    margin: 35px 0px 0px
+}
+
+.superhost-text {
+    color: rgb(120,120,120);
+    font-family: 'Geneva, Verdana, sans-serif';
+    margin: 5px 12px 0px
+}
+
+.below-img {
+    border-bottom: 1px solid rgb(211,211,211);
+}
+
+.hosts-description {
+    margin: 25px 0px 0px
+}
+
+.house-deets {
+    margin: 5px 0px 30px;
+    width: 50%
+}
+
+.basic-info {
+    border-bottom: 1px solid rgb(211,211,211);
+}
+
+.cancellation {
+    margin: 35px 0px 0px
+}
+
+.review-stuff {
+    border-bottom: 1px solid rgb(211,211,211);
+}
+
+.review-button {
+    color: black;
+}
+
+
+.spot-reviews {
+    margin: 0px -40px 0px
+}
+
+.update-delete-div {
+    display : flex;
+}
+
+.info-card {
+    display: block;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+    width: 250px;
+    height: 300px;
+    text-decoration: none;
+    justify-content: top;
+    align-items: right;
+    margin: 0px;
+    margin-top: -240px;
+    float: right;
+    text-align: center;
+}
