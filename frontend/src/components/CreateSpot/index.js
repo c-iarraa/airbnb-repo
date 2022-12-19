@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { createSpot } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 import  AllSpots  from '../AllSpots/index.js';
+import './CreateSpot.css';
 
 
 
@@ -73,8 +74,8 @@ const CreateSpotModal = () => {
 
 
       return (
-        <nav>
-           <h1>Create your spot</h1>
+        <nav className='spot-container'>
+           <h2 className='create-spot-title' style={{ fontFamily: 'Geneva, Verdana, sans-serif' }}>Create your spot</h2>
            <form onSubmit={handleSubmit}>
             <ul>
               {errors.map((error, idx) => (
@@ -82,8 +83,8 @@ const CreateSpotModal = () => {
               ))}
             </ul>
             <label>
-              Name
-              <input
+              {/* Name */}
+              <input className='input-details'
                 type="text"
                 placeholder='Name'
                 value={name}
@@ -93,8 +94,8 @@ const CreateSpotModal = () => {
             </label>
 
             <label>
-              Address
-              <input
+              {/* Address */}
+              <input className='input-details'
                 type="text"
                 placeholder='Address'
                 value={address}
@@ -104,8 +105,8 @@ const CreateSpotModal = () => {
             </label>
 
             <label>
-              City
-              <input
+              {/* City */}
+              <input className='input-details'
                 type="text"
                 placeholder='City'
                 value={city}
@@ -115,8 +116,8 @@ const CreateSpotModal = () => {
             </label>
 
             <label>
-              State
-              <input
+              {/* State */}
+              <input className='input-details'
                 type="text"
                 placeholder='State'
                 value={state}
@@ -126,8 +127,8 @@ const CreateSpotModal = () => {
             </label>
 
             <label>
-              Country
-              <input
+              {/* Country */}
+              <input className='input-details'
                 type="text"
                 placeholder='Country'
                 value={country}
@@ -137,8 +138,8 @@ const CreateSpotModal = () => {
             </label>
 
             <label>
-              Lat
-              <input
+              {/* Lat */}
+              <input className='input-details'
                 type="number"
                 placeholder='Lat'
                 value={lat}
@@ -148,8 +149,8 @@ const CreateSpotModal = () => {
             </label>
 
             <label>
-              Lng
-              <input
+              {/* Lng */}
+              <input className='input-details'
                 type="number"
                 placeholder='Lng'
                 value={lng}
@@ -159,8 +160,8 @@ const CreateSpotModal = () => {
             </label>
 
             <label>
-              Description
-              <input
+              {/* Description */}
+              <input className='input-details'
                 type="text"
                 placeholder='Description'
                 value={description}
@@ -170,8 +171,8 @@ const CreateSpotModal = () => {
             </label>
 
             <label>
-              Price
-              <input
+              {/* Price */}
+              <input className='input-details'
                 type="number"
                 placeholder='Price'
                 value={price}
@@ -181,8 +182,8 @@ const CreateSpotModal = () => {
             </label>
 
             <label>
-              Image Url
-              <input
+              {/* Image Url */}
+              <input className='input-details'
                 type="url"
                 placeholder='Image Url'
                 value={imageUrl}
@@ -190,7 +191,7 @@ const CreateSpotModal = () => {
                 required
               />
             </label>
-            <button type="submit">Save</button>
+            <button className='submit-button' type="submit">Save</button>
           </form>
             </nav>
           )
