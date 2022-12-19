@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpot, deleteSpot } from '../../store/spots'
-import { getReviews, createReview } from '../../store/reviews';
+import { getReviews, createReview, deleteReview } from '../../store/reviews';
 
 
 const SpotDetails = () => {
@@ -10,12 +10,19 @@ const SpotDetails = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const spotSelector = useSelector(state => state.spots.oneSpot);
-    const sessionId = useSelector(state => state.session.user.id) //session user id
+    const sessionId = useSelector(state => state.session.user?.id) //session user id
+    const reviewId = useSelector(state => state.reviews.allReviews);
     const [validationErrors, setValidationErrors] = useState([]);
-    const spotReviews = useSelector(state => state.reviews.allReviews);
-    const reviews = Object.values(spotReviews)
+    const reviews = Object.values(reviewId)
+    // console.log(sessionId, 'hiiiiiii')
 
     const spotArr = Object.values(spotSelector)
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    }
+
 
 
     useEffect(() => {
@@ -36,10 +43,18 @@ const SpotDetails = () => {
     }
 
     const CreateReview = async (e) => {
+
         e.preventDefault();
         await dispatch(createReview(spotId))
         history.push('/${spotId}')
     }
+
+    // const deleteReview = (e) => {
+    //     e.preventDefault()
+    //     return dispatch(deleteReview(spotId))
+    //     // history.push('/')
+    // }
+
 
 
 
@@ -67,7 +82,7 @@ const SpotDetails = () => {
                     <h4> Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</h4>
                     <h4><i class="fa-light fa-calendar"></i> Free cancellation for 48 hours.</h4>
                 </div>
-                <div className='update&delete&-spot-div'>
+                <div className='update&deletes-div'>
                     {(spotSelector.ownerId === sessionId) &&
                     <div>
                         <div>
@@ -79,26 +94,41 @@ const SpotDetails = () => {
                     </div>
                     }
                 </div>
-                {(spotSelector.ownerId !== sessionId) &&
-                    <div className='review-button'>
-                        <NavLink to={`/spots/${spotId}/review`}>Create A Review</NavLink>
+                <div className='review-features-div'>
+                    {(spotSelector.ownerId !== sessionId) &&
+                    <div>
+                        <div className='review-button'>
+                            <NavLink to={`/spots/${spotId}/review`}>Create A Review</NavLink>
+                        </div>
                     </div>
                 }
+                </div>
                 <ul className="spot-reviews">
-                    {
-                        reviews.map(review => (
+                    {reviews.map(review => (
 
                             <div className = 'review-values' key={review.id}>
                                 <h3 className='review-text'>{review.review}</h3>
                                 <h3 className='review-stars'>{review.stars}</h3>
-                                {/* <h3 className='review-amount'>{review.}</h3> */}
+                                <div className = 'delete-review-button'>
+                                    {(review.userId === sessionId) &&
+                                        <div>
+                                            <div>
+                                                <button onClick={ async (e) => {
+                                                    e.preventDefault();
+                                                    const deletedReview = await dispatch((deleteReview(review.id)))
+                                                    if (deletedReview) history.push(`/`)
+                                                }}>Delete Review</button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
                             </div>
                         ))
                     }
-                    </ul>
+                </ul>
             </div>
         </nav>
-      )
-}
+        )
+        }
 
-    export default SpotDetails;
+        export default SpotDetails;

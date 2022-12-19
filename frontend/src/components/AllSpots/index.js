@@ -29,9 +29,13 @@ function AllSpots(){
                 <div id='spotCard' key={el.id}>
                  <NavLink to={`api/spots/${el.id}`}>
                     <img src={el.previewImage} className='spotImg'></img>
-                    <h4>{el.city}, {el.state}</h4>
-                    <h4>{el.avgRating}</h4>
-                    <h4>${el.price} night</h4>
+                    <h4 className='spot-location' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{el.city}, {el.state}</h4>
+                    {/* <h4 className='avg-rating' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i>{el.avgRating}</h4> */}
+                    <div className='avg-rating' style={{width:'60px',textAlign:'right'}}>
+                        <i style={{ color: 'black', lineHeight: 0  }} className="fa-solid fa-star"></i>
+                        {el.avgRating ? parseFloat(el.avgRating).toFixed(1) : 'New'}
+                    </div>
+                    <h4 className='nightly-price' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>${el.price} night</h4>
                  </NavLink>
                 </div>
             </ul>

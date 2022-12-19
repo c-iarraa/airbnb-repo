@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation";
 import AllSpots from "./components/AllSpots";
 import SpotDetails from './components/SpotDetails';
 import UpdateSpot from './components/UpdateSpot';
-import CreateSpotModal from './components/CreateSpotModal';
+import CreateSpot from './components/CreateSpot';
 import ReviewsForSpot from "./components/ReviewsForSpot";
 import CreateAReviewModal from './components/CreateAReviewModal';
 
@@ -35,8 +35,8 @@ function App() {
          <Route exact path='/api/spots/:spotId'>
            <SpotDetails />
          </Route>
-         <Route exact path='/'>
-           <CreateSpotModal />
+         <Route exact path='/spots/new'>
+           <CreateSpot />
          </Route>
          <Route exact path='/spots/:spotId/reviews'>
            <ReviewsForSpot />

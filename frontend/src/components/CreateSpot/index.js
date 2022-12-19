@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createSpot } from '../../store/spots';
 import { useModal } from "../../context/Modal";
+import  AllSpots  from '../AllSpots/index.js';
 
 
 
@@ -24,11 +25,15 @@ const CreateSpotModal = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [imageUrl, setImageUrl] = useState('');
+    const [validationErrors, setValidationErrors] = useState([]);
+    const ownerId = useSelector(state=> state.session.user?.id)
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
     setErrors([])
+
     const payload = {
         name,
         address,
@@ -39,17 +44,26 @@ const CreateSpotModal = () => {
         lng,
         description,
         price: +price,
+        ownerId,
         imageUrl
       };
       console.log(payload)
 
-    let createdSpot = dispatch(createSpot(payload))
-    if (createdSpot) {
-        history.push(`/`);
-        // hideForm();
-    };
+      // const image = {
+      //   url: imageUrl,
+      //   preview: true,
+      // };
 
-    closeModal();
+    const test = dispatch(createSpot(payload))
+    .then(() => dispatch(AllSpots()))
+    .then (() => history.push('/'))
+    .catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    )
+    if (test) history.push('/')
   }
 
     // const handleCancelClick = (e) => {
@@ -77,6 +91,7 @@ const CreateSpotModal = () => {
                 required
               />
             </label>
+
             <label>
               Address
               <input
@@ -87,6 +102,7 @@ const CreateSpotModal = () => {
                 required
               />
             </label>
+
             <label>
               City
               <input
@@ -97,6 +113,7 @@ const CreateSpotModal = () => {
                 required
               />
             </label>
+
             <label>
               State
               <input
@@ -107,6 +124,7 @@ const CreateSpotModal = () => {
                 required
               />
             </label>
+
             <label>
               Country
               <input
@@ -117,6 +135,7 @@ const CreateSpotModal = () => {
                 required
               />
             </label>
+
             <label>
               Lat
               <input
@@ -127,6 +146,7 @@ const CreateSpotModal = () => {
                 required
               />
             </label>
+
             <label>
               Lng
               <input
@@ -137,6 +157,7 @@ const CreateSpotModal = () => {
                 required
               />
             </label>
+
             <label>
               Description
               <input
@@ -147,6 +168,7 @@ const CreateSpotModal = () => {
                 required
               />
             </label>
+
             <label>
               Price
               <input
@@ -157,10 +179,11 @@ const CreateSpotModal = () => {
                 required
               />
             </label>
+
             <label>
               Image Url
               <input
-                type="text"
+                type="url"
                 placeholder='Image Url'
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}

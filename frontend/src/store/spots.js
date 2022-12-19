@@ -10,9 +10,16 @@ export const LOAD_SPECIFIC_SPOT = "spots/GETONESPOT";
 export const UPDATE_SPOT = "spots/UPDATESPOT";
 export const CREATE_SPOT = "spots/CREATESPOT";
 export const REMOVE_SPOT = "spots/REMOVESPOT";
+// export const ADD_IMAGE = "spots/ADDIMAGE"
 
 
 // regular action creators
+
+// const addImg = (image) => ({
+//   type: ADD_IMAGE,
+//   image
+// })
+
 const remove = (spot) => ({
     type: REMOVE_SPOT,
     spot
@@ -59,21 +66,52 @@ export const deleteSpot = (spotId) => async dispatch =>{
 
 // Create the action creator to create a spot
 // thunk action creator
-export const createSpot = (spotId) => async dispatch =>{
-  const response = await csrfFetch(`/api/spots`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(spotId),
-    })
+// export const createSpot = (spotId, url) => async dispatch =>{
+//   const response = await csrfFetch(`/api/spots`, {
+//       method: 'POST',
+//       headers: {'Content-Type': 'application/json'},
+//       body: JSON.stringify(spotId),
+//     })
 
-  if (response.ok){
-   // Constant variable to specify the action type (“spots/createSpot”)
-    const spot = await response.json()
-    dispatch(create(spot))
-    return spot
+//   if (response.ok){
+//    // Constant variable to specify the action type (“spots/createSpot”)
+//     const spot = await response.json()
+//     const res = await csrfFetch(`/api/spots/${spot.id}/images`, {
+//       method: "POST",
+//       body: JSON.stringify({
+//         url,
+//         preview: true
+//       }),
+//     });
+//     dispatch(create(spot, url))
+//     return spot
+//   }
+// }
+
+export const createSpot = (newInfo)=> async dispatch => {
+  const res = await csrfFetch(`/api/spots`, {
+    method: 'POST',
+    body: JSON.stringify(newInfo)
+  })
+  if(res.ok){
+    const data = await res.json();
+
+    const res2 = await csrfFetch(`/api/spots/${data.id}/images`,
+    {method: "POST",
+    body: JSON.stringify({
+      url: newInfo.imageUrl,
+      preview: true
+    })
+  })
+  if(res2.ok){
+    data.previewImage = newInfo.imageUrl
+    await dispatch(createSpot(data))
+    console.log(data, 'hello')
+    return data
+  }
+
   }
 }
-
 
 
 // Create the action creator to update a spot
@@ -146,9 +184,10 @@ const spotReducer = (state = initialState, action) => {
             })
         }else {
             newState.allSpots[action.payload.id] = action.payload
+          }
+          console.log(newState, '12345')
+          return newState
         }
-            return newState
-      }
       case UPDATE_SPOT: {
         const newState = { ...state, allSpots: { ...state.allSpots}}
         newState.allSpots[action.spot.id] = action.spot;

@@ -5,7 +5,6 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import DemoUserModal from '../DemoUserModal';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-import CreateSpotModal from '../CreateSpotModal';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -52,13 +51,6 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
-            <li>
-              <OpenModalMenuItem
-              itemText="LairBnb your home"
-              onItemClick={closeMenu}
-              modalComponent={<CreateSpotModal />}
-              />
-            </li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>

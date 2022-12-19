@@ -10,14 +10,24 @@ function Navigation({ isLoaded }){
 
   return (
     <ul>
-      <h4>
-        <NavLink exact to="/">LairBnb</NavLink>
-      </h4>
-      {isLoaded && (
-        <li>
-          <ProfileButton user={sessionUser} />
-        </li>
-      )}
+      <div className='nav-bar'>
+         <div className='top-left'>
+              <img className='airbnb-logo' src='https://seeklogo.com/images/A/airbnb-logo-1D03C48906-seeklogo.com.png' />
+        </div>
+        <NavLink className='home-button' style={{fontFamily: 'Geneva, Verdana, sans-serif'}} exact to="/">LairBnb</NavLink>
+      <div className='top-right'>
+        <ul>
+          {sessionUser &&
+            <NavLink className="create-spot-link" style={{fontFamily: 'Geneva, Verdana, sans-serif'}} exact to="/spots/new">LairBnb your home</NavLink>
+          }
+        </ul>
+        {isLoaded && (
+          <ul>
+            <ProfileButton className='profile-button' user={sessionUser} />
+          </ul>
+        )}
+      </div>
+      </div>
     </ul>
   );
 }

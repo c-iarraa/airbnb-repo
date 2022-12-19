@@ -1,3 +1,37 @@
 .hidden {
     display: none;
 }
+
+
+.top-right {
+    display: flex;
+    text-decoration: none;
+    justify-content: right;
+    align-items: right;
+}
+
+.nav-bar{
+    display: flex;
+    justify-content: space-between;
+    width: 1120px;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    align-items: center;
+    border-bottom: 1px solid rgb(211,211,211);
+}
+
+.create-spot-link{
+    color: black;
+}
+
+.home-button{
+    display: flex;
+    align-items: left;
+    color: black;
+
+}
+
+.airbnb-logo{
+    width: 35px;
+}

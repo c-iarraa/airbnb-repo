@@ -1,15 +1,38 @@
 a:link { text-decoration: none; }
 a:visited { text-decoration: none; }
 
-.container{
+.container {
 display: grid;
-grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
-grid-gap: 30px;
+grid-template-columns: repeat(auto-fill, 330px);
+justify-content: center;
+grid-gap: 1rem;
+row-gap: 10px;
+column-gap: 5px;
+list-style: none;
+height: auto;
+width: auto;
+margin: auto;
+
 }
 
 
 .spotImg{
-    width: 250px;
-    border-radius: 7px;
-    height: 233px;
+    width: 300px;
+    border-radius: 10px;
+    height: 300px;
+}
+
+
+.avg-rating {
+    /* display: flex;
+    justify-content: flex-end; */
+    color: black;
+}
+
+.spot-location {
+    color: black;
+}
+
+.nightly-price {
+    color: black;
 }

@@ -96,11 +96,11 @@ const reviewReducer = (state = initialState, action) => {
           }
       }
 
-    //   case REMOVE_REVIEW: {
-    //     const newState = {...state, allReviews: { ...state.allReviews}}
-    //     delete newState.allReviews[action.id]
-    //     return newState
-    //   }
+      case REMOVE_REVIEW: {
+        const newState = {...state, allReviews: { ...state.allReviews}}
+        delete newState.allReviews[action.id]
+        return newState
+      }
 
     default:
       return state;
