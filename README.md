@@ -11,12 +11,12 @@ Live Wiki Link: [https://github.com/D0RK5TER/earthRnR/wiki]
 
 ## Project was made using:
 
-> Javascript
-> Sequelize
-> Express
-> React
-> Redux
-> Render
+>- Javascript
+>- Sequelize
+>- Express
+>- React
+>- Redux
+>- Render
 
 ## Available Features (CRUD)
 #
