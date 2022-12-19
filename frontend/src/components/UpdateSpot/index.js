@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateSpot } from '../../store/spots'
+import './UpdateSpot.css';
 
 
 const UpdateSpot  = ({ spot }) => {
@@ -50,10 +51,11 @@ const UpdateSpot  = ({ spot }) => {
             urlImage
         };
 
-    let updatedSpot = await dispatch(updateSpot(updatingSpot));
-    if (updatedSpot) {
-      history.push('/')
-    }
+    const updatedSpot = await dispatch((updateSpot(updatingSpot)))
+    .then (() => history.push(`/`))
+    // if (updatedSpot) {
+    //   history.push('/')
+    // }
   };
 
   // const handleCancelClick = (e) => {
@@ -64,20 +66,22 @@ const UpdateSpot  = ({ spot }) => {
       return (
         <section className="update-form-holder centered middled">
       <form onSubmit={handleSubmit}>
-        <input
+      <div className='UpdateSpotContainer'>
+      <h2 style={{ fontFamily: 'Geneva, Verdana, sans-serif' }}>Update a Spot</h2>
+        <input className ='update-inputs'
           type="text"
           placeholder="Address"
           min="1"
           required
           value={address}
           onChange={updateAddress} />
-        <input
+        <input className ='update-inputs'
           type="text"
           placeholder="City"
           required
           value={city}
           onChange={updateCity} />
-        <input
+        <input className ='update-inputs'
           type="text"
           placeholder="State"
           min="0"
@@ -85,43 +89,44 @@ const UpdateSpot  = ({ spot }) => {
           required
           value={state}
           onChange={updateState} />
-        <input
+        <input className ='update-inputs'
           type="text"
           placeholder="Country"
           value={country}
           onChange={updateCountry} />
-        <input
+        <input className ='update-inputs'
           type="number"
           placeholder="Lat"
           value={lat}
           onChange={updateLat} />
-        <input
+        <input className ='update-inputs'
           type="number"
           placeholder="Lng"
           value={lng}
           onChange={updateLng} />
-        <input
+        <input className ='update-inputs'
           type="text"
           placeholder="Name"
           value={name}
           onChange={updateName} />
-        <input
+        <input className ='update-inputs'
           type="text"
           placeholder="Description"
           value={description}
           onChange={updateDescription} />
-        <input
+        <input className ='update-inputs'
           type="number"
           placeholder="Price"
           value={price}
           onChange={updatePrice} />
-          <input
+          <input className ='update-inputs'
           type="text"
           placeholder="Url Image"
           value={urlImage}
           onChange={updateUrlImage} />
-        <button type="submit">Update</button>
+        <button className='update-button' type="submit">Update</button>
         {/* <button type="button" onClick={handleCancelClick}>Cancel</button> */}
+        </div>
       </form>
     </section>
       )

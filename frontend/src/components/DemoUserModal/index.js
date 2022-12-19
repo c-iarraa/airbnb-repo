@@ -27,32 +27,35 @@ function DemoUserModal () {
 
     return (
         <>
-        <h1>Log In</h1>
+        <h1 className='login-form-title'>Log In</h1>
         <form onSubmit={handleSubmit}>
+        <h2 style={{ fontFamily: 'Geneva, Verdana, sans-serif' }}>Welcome to LairBnb</h2>
           <ul>
             {errors.map((error, idx) => (
               <li key={idx}>{error}</li>
             ))}
           </ul>
           <label>
-            Username or Email
-            <input
+            {/* Username or Email */}
+            <input className = 'login-inputs'
               type="text"
+              placeholder='Username or Email'
               value={credential}
               onChange={(e) => setCredential(e.target.value)}
               required
             />
           </label>
           <label>
-            Password
-            <input
+            {/* Password */}
+            <input className = 'login-inputs'
               type="password"
+              placeholder='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </label>
-          <button type="submit">log in</button>
+          <button className='login-button' type="submit">log in</button>
         </form>
         </>
       );

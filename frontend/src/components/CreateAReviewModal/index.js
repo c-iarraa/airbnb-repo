@@ -4,6 +4,7 @@ import { useHistory,  } from 'react-router-dom';
 import { createReview } from '../../store/reviews';
 import { useModal } from "../../context/Modal";
 import { useParams } from 'react-router-dom';
+import './CreateAReviewModal.css';
 
 
 
@@ -64,7 +65,7 @@ const CreateReviewModal = () => {
 
       return (
         <nav>
-           <h1>Create your Review</h1>
+           <h1 className='create-review-title'>Create your Review</h1>
            <form onSubmit={handleSubmit}>
            {/* {hasSubmitted && errors.length > 0 && ( */}
             <ul>
@@ -74,8 +75,8 @@ const CreateReviewModal = () => {
             </ul>
           {/* )} */}
             <label>
-              Review
-              <input
+              {/* Review */}
+              <input className='input-values'
                 type="text"
                 placeholder='Review'
                 value={review}
@@ -84,8 +85,8 @@ const CreateReviewModal = () => {
               />
             </label>
             <label>
-              Stars
-              <input
+              {/* Stars */}
+              <input className='input-values'
                 type="number"
                 placeholder='Stars'
                 value={stars}
@@ -95,7 +96,7 @@ const CreateReviewModal = () => {
                 required
               />
             </label>
-            <button type="submit">Save</button>
+            <button className='submit-button' type="submit">Save</button>
           </form>
             </nav>
           )
