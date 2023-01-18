@@ -17,9 +17,15 @@
     flex-direction: column;
     justify-content: center;
     width: 630px;
+    align-items: center;
+    /* margin: 16px 0px 40px; */
+    margin: auto;
+    padding: none;
+    width: 400px
+
   }
 
-h2{
+h2 {
     margin-bottom: 30px;
 }
 

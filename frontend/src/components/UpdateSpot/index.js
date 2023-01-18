@@ -67,7 +67,9 @@ const UpdateSpot  = ({ spot }) => {
         <section className="update-form-holder centered middled">
       <form onSubmit={handleSubmit}>
       <div className='UpdateSpotContainer'>
-      <h2 style={{ fontFamily: 'Geneva, Verdana, sans-serif' }}>Update a Spot</h2>
+        <div className='update-spot-header'>
+          <h2 style={{ fontFamily: 'Geneva, Verdana, sans-serif' }}>Update a Spot</h2>
+        </div>
         <input className ='update-inputs'
           type="text"
           placeholder="Address"
@@ -94,7 +96,7 @@ const UpdateSpot  = ({ spot }) => {
           placeholder="Country"
           value={country}
           onChange={updateCountry} />
-        <input className ='update-inputs'
+        {/* <input className ='update-inputs'
           type="number"
           placeholder="Lat"
           value={lat}
@@ -103,7 +105,7 @@ const UpdateSpot  = ({ spot }) => {
           type="number"
           placeholder="Lng"
           value={lng}
-          onChange={updateLng} />
+          onChange={updateLng} /> */}
         <input className ='update-inputs'
           type="text"
           placeholder="Name"
@@ -119,11 +121,11 @@ const UpdateSpot  = ({ spot }) => {
           placeholder="Price"
           value={price}
           onChange={updatePrice} />
-          <input className ='update-inputs'
+          {/* <input className ='update-inputs'
           type="text"
           placeholder="Url Image"
           value={urlImage}
-          onChange={updateUrlImage} />
+          onChange={updateUrlImage} /> */}
         <button className='update-button' type="submit">Update</button>
         {/* <button type="button" onClick={handleCancelClick}>Cancel</button> */}
         </div>

@@ -8,16 +8,17 @@
     text-decoration: none;
     justify-content: right;
     align-items: right;
+    padding-bottom: 20px;
 }
 
 .nav-bar{
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin: auto;
+    /* margin: auto; */
     margin-top: 25px;
     margin-bottom: 20px;
-    align-items: center;
+    /* align-items: center; */
     border-bottom: 1px solid rgb(211,211,211);
 }
 
@@ -29,7 +30,8 @@
     display: flex;
     align-items: left;
     color: #da467d;
-    font-weight: 2000
+    font-weight: 900px;
+    padding-bottom: 20px;
 
 }
 

@@ -4,6 +4,8 @@
     flex-direction: column;
     justify-content: center;
     width: 630px;
+    margin: auto;
+    padding: none;
 }
 
 .create-spot-title {
@@ -11,14 +13,12 @@
     padding:0 0 10px 0;
     /* border-bottom: 1px solid silver; */
     font-family: Geneva, Verdana, sans-serif;
-    font-size: 16px;
+    /* font-size: 16px; */
     font-weight: 800;
 }
 
 .input-details {
-    /* display: block;
-    width: 400px;
-    margin: 15px */
+
     display: block;
     border: auto;
     width:90%;

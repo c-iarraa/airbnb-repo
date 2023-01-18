@@ -28,7 +28,7 @@ function AllSpots(){
             <ul>
                 <div id='spotCard' key={el.id}>
                  <NavLink to={`api/spots/${el.id}`}>
-                    <img src={el.previewImage} className='spotImg'></img>
+                    <img className='spotImg' src={el.previewImage}></img>
                     <h4 className='spot-location' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{el.city}, {el.state}</h4>
                     {/* <h4 className='avg-rating' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i>{el.avgRating}</h4> */}
                     <div className='avg-rating' style={{width:'60px',textAlign:'right'}}>
