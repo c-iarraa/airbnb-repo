@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory,  } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { createReview } from '../../store/reviews';
 import { useModal } from "../../context/Modal";
 import { useParams } from 'react-router-dom';
@@ -11,17 +11,31 @@ import './CreateAReviewModal.css';
 
 
 const CreateReviewModal = () => {
-  const spotSelectorId = useSelector(state => state.spots.oneSpot.id);
-  // console.log(spotSelector)
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const [errors, setErrors] = useState([]);
-  const [hasSubmitted, setHasSubmitted] = useState(false)
-  const { closeModal } = useModal();
-  const {spotId} = useParams()
+  // const spotSelectorId = useSelector(state => state.spots.oneSpot.id);
+  // // console.log(spotSelector)
+  // const {spotId} = useParams()
+  // const dispatch = useDispatch();
+  // const history = useHistory();
+  // const [errors, setErrors] = useState([]);
+  // const [hasSubmitted, setHasSubmitted] = useState(false)
+  // const { closeModal } = useModal();
 
-    const [review, setReview] = useState('');
-    const [stars, setStars] = useState('');
+  //   const [review, setReview] = useState('');
+  //   const [stars, setStars] = useState('');
+
+  const {spotId} = useParams()
+const dispatch = useDispatch()
+const history = useHistory()
+const state = useSelector(state => state);
+console.log(state)
+let userId;
+if(state.session.user){
+  userId = state.session.user.id
+}
+
+const [errors, setErrors] = useState([]);
+const [stars, setStars] = useState('');
+const [review, setReview] = useState('');
 
     // useEffect(() => {
     //   let error = [];
@@ -39,27 +53,51 @@ const CreateReviewModal = () => {
 
     setErrors([])
     const payload = {
+      spotId,
+      userId,
         review,
         stars
       };
       // console.log(payload)
       // console.log(spotForId)
 
-    return dispatch(createReview(spotSelectorId, payload))
-    .then (() => history.push(`/`))
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data.message === '"undefined" is not a valid integer') {
-          setErrors('User is only allowed one review per spot')
-        };
+    // return dispatch(createReview(spotSelectorId, payload))
+    // .then (() => history.push(`/`))
+    // .catch(async (res) => {
+    //   const data = await res.json();
+    //   if (data.message === '"undefined" is not a valid integer') {
+    //     setErrors('User is only allowed one review per spot')
+    //   };
 
-        if (data && data.errors) {
-          setErrors(data.errors);
-        };
+    //   if (data && data.errors) {
+    //     setErrors(data.errors);
+    //   };
 
-        if (data && data.message) {
-          setErrors([data.message])
-        };
+    //   if (data && data.message) {
+    //     setErrors([data.message])
+    //   };
+    //   });
+
+    const dispatched = dispatch(createReview(spotId, payload))
+    .catch(async (res) => {
+      const data = await res.json();
+      if (data.message === '"undefined" is not a valid integer') {
+        setErrors('User is only allowed one review per spot')
+      };
+
+      // if (data.message === )
+
+      if (data && data.errors) {
+        setErrors(data.errors);
+      };
+
+      if (data && data.message) {
+        setErrors([data.message])
+      };
+
+      if (dispatched) (
+        history.push(`/`)
+      )
       });
   }
 

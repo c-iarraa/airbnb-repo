@@ -1,12 +1,12 @@
 /* #root {
     margin: 0 auto;
-    width: 1250px;
+    width: 1024px;
     padding-top: 20px;
     grid-template-columns: repeat(auto-fill, 330px);
 } */
 
 .detailsDiv {
-    width: 1000px;
+    width: 1024px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -20,6 +20,7 @@
 
 .description2 {
     margin-top: 0px;
+
 }
 
 .specific-spot-img {
@@ -141,6 +142,7 @@
     padding-left: 10px;
     font-size: 14px;
     justify-content: flex-start;
+    text-decoration: underline;
 }
 
 .cleaning-fee {
@@ -153,6 +155,7 @@
 
 .cleaning-fee1 {
     font-size: 15px;
+    text-decoration: underline;
 }
 
 .cleaning-fee2 {
@@ -170,6 +173,7 @@
 
 .service-fee1 {
     font-size: 15px;
+    text-decoration: underline;
 }
 
 .service-fee2 {
