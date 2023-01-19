@@ -150,7 +150,7 @@ const SpotDetails = () => {
                     {reviews.map(review => (
 
                             <div className = 'review-values' key={review.id}>
-                                <h3 className='review-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{review.review}</h3>
+                                <h3 className='review-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{review.User.firstName}:  {review.review}</h3>
                                 <h3 className='review-stars' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{review.stars}</h3>
                                 <div className = 'delete-review-button'>
                                     {(review.userId === sessionId) &&
@@ -158,9 +158,10 @@ const SpotDetails = () => {
                                             <div>
                                                 <button onClick={ async (e) => {
                                                     e.preventDefault();
-                                                    const deletedReview = await dispatch((deleteReview(review.id)))
+                                                    // const deletedReview = await dispatch((deleteReview(review.id)))
+                                                    return dispatch(deleteReview(review.id))
                                                     // if (deletedReview) history.push(`/`)
-                                                    .then (() => history.push('/'))
+                                                    .then (() => history.push(`/`))
                                                 }}>Delete Review</button>
                                             </div>
                                         </div>

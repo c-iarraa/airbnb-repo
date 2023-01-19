@@ -52,7 +52,7 @@ const UpdateSpot  = ({ spot }) => {
         };
 
     const updatedSpot = await dispatch((updateSpot(updatingSpot)))
-    .then (() => history.push(`/`))
+    .then (() => history.push(`/spots/${spotId}`))
     // if (updatedSpot) {
     //   history.push('/')
     // }

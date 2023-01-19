@@ -7,31 +7,16 @@ import { useParams } from 'react-router-dom';
 import './CreateAReviewModal.css';
 
 
-
-
-
 const CreateReviewModal = () => {
-  // const spotSelectorId = useSelector(state => state.spots.oneSpot.id);
-  // // console.log(spotSelector)
-  // const {spotId} = useParams()
-  // const dispatch = useDispatch();
-  // const history = useHistory();
-  // const [errors, setErrors] = useState([]);
-  // const [hasSubmitted, setHasSubmitted] = useState(false)
-  // const { closeModal } = useModal();
-
-  //   const [review, setReview] = useState('');
-  //   const [stars, setStars] = useState('');
-
   const {spotId} = useParams()
-const dispatch = useDispatch()
-const history = useHistory()
-const state = useSelector(state => state);
-console.log(state)
-let userId;
-if(state.session.user){
-  userId = state.session.user.id
-}
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const state = useSelector(state => state);
+  console.log(state)
+  let userId;
+  if(state.session.user){
+    userId = state.session.user.id
+  }
 
 const [errors, setErrors] = useState([]);
 const [stars, setStars] = useState('');
@@ -79,6 +64,7 @@ const [review, setReview] = useState('');
     //   });
 
     const dispatched = dispatch(createReview(spotId, payload))
+    .then (() => history.push(`/api/spots/${spotId}`))
     .catch(async (res) => {
       const data = await res.json();
       if (data.message === '"undefined" is not a valid integer') {
@@ -95,9 +81,9 @@ const [review, setReview] = useState('');
         setErrors([data.message])
       };
 
-      if (dispatched) (
-        history.push(`/`)
-      )
+      // if (dispatched) (
+      //   history.push(`/api/spots/${spotId}`)
+      // )
       });
   }
 

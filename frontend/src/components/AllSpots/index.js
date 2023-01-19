@@ -22,7 +22,7 @@ function AllSpots(){
       }, [dispatch])
 
 
-    return (
+    return sessionSpot && spotArr &&(
         <nav className='container'>
             {spotArr.map(el => (
             <ul>

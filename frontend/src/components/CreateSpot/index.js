@@ -55,16 +55,17 @@ const CreateSpotModal = () => {
       //   preview: true,
       // };
 
-    const test = dispatch(createSpot(payload))
+    return dispatch(createSpot(payload))
     .then(() => dispatch(AllSpots()))
     .then (() => history.push('/'))
     .catch(
       async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
+        if (data && data.errors) setErrors(data.errors)
+    }
     )
-    if (test) history.push('/')
+    .then (() => history.push('/'))
+    // if (test) history.push('/')
   }
 
     // const handleCancelClick = (e) => {
