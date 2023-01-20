@@ -33,7 +33,7 @@ function SignupFormModal() {
     <>
       <h1 className='signup-form-title' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Sign Up</h1>
       <form className='top-of-signin-form' style={{height:'400px'}} onSubmit={handleSubmit}>
-      <h2 style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Welcome to LairBnb</h2>
+      <h2 style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Welcome to ToonBnb</h2>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>

@@ -32,8 +32,8 @@ const load = (reviewList) => ({
 export const deleteReview = (reviewId) => async dispatch =>{
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({reviewId}),
+        // headers: {'Content-Type': 'application/json'},
+        // body: JSON.stringify({reviewId}),
     })
 
     if (response.ok){
@@ -73,38 +73,71 @@ export const getReviews = (spotId) => async (dispatch) =>{
      // Constant variable to specify the action type (“spots/getAllSpots”)
       const reviews = await response.json()
       dispatch(load(reviews))
-      return reviews
+      // return reviews
     }
   }
 
   // state object
-const initialState = { allReviews: {} };
+// const initialState = { allReviews: {} };
+// const reviewReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//       // Create a case in your reducer to handle the data returned from fetch/parse
+//     case LOAD_REVIEWS:{
+//       const newState = { allReviews: {} };
+//             action.reviewList.Reviews.forEach(review => newState.allReviews[review.id] = review);
+//             return newState;
+//         }
 
-const reviewReducer = (state = initialState, action) => {
-  switch (action.type) {
-      // Create a case in your reducer to handle the data returned from fetch/parse
-    case LOAD_REVIEWS:{
-      const newState = { allReviews: {} };
-            action.reviewList.Reviews.forEach(review => newState.allReviews[review.id] = review);
-            return newState;
-        }
+//       case CREATE_REVIEW: {
+  //         return {
+    //             ...state, allReviews: {...state.allReviews, [action.review.id]: action.review}
+    //           }
+    //       }
 
-      case CREATE_REVIEW: {
-        return {
-            ...state,
-            [action.review.id]: action.review,
-          }
+    //       // case REMOVE_REVIEW: {
+  //       //   const newState = {...state, allReviews: { ...state.allReviews}}
+  //       //   delete newState.allReviews[action.reviewId.id]
+  //       //   return newState
+  //       // }
+
+  //     default:
+  //       return state;
+  //   }
+  // };
+
+  // export default reviewReducer;
+  let initalState = {spot:{}, user:{}}
+  export default function reviewReducers(state={spot:{}, user:{}}, action){
+    switch (action.type) {
+      case LOAD_REVIEWS:{
+        //console.log("In LOAD_REVIEWS, state: ", state)
+        //console.log('actionreviews+++++',action.reviews)
+        let newState = { spot:{}, user:{} }
+
+        action.reviewList.Reviews.forEach(review => {
+          newState.spot[review.id] = review
+        })
+        //console.log("In LOAD_REVIEWS, newState: ", newState)
+        return newState;
       }
 
-      case REMOVE_REVIEW: {
-        const newState = {...state, allReviews: { ...state.allReviews}}
-        delete newState.allReviews[action.id]
+      case CREATE_REVIEW:{
+        const newState = { ...state, spot:{...state.spot}, user:{...state.user} }
+        newState.spot[action.review.id] = action.review
         return newState
       }
 
-    default:
-      return state;
-  }
-};
+      case REMOVE_REVIEW:{
+        //console.log("In DELETE_REVIEW, state: ", state)
+        const newState = { ...state, spot:{...state.spot}, user:{...state.user} }
+        delete newState.user[action.reviewId.id]
+        delete newState.spot[action.reviewId.id]
+        //console.log("In DELETE_REVIEW, action: ", action)
+        //console.log("In DELETE_REVIEW, newState: ", newState)
+        return newState;
+      }
 
-export default reviewReducer;
+        default:
+            return state;
+    }
+}

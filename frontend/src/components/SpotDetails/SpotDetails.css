@@ -1,27 +1,37 @@
-#root {
+/* #root {
     margin: 0 auto;
-    width: 1250px;
+    width: 1024px;
     padding-top: 20px;
     grid-template-columns: repeat(auto-fill, 330px);
+} */
+
+.detailsDiv {
+    width: 1024px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .description {
     color: black;
     display: flex;
     flex-direction: column;
+}
+
+.description2 {
+    margin-top: 0px;
 
 }
 
 .specific-spot-img {
     border-radius: 20px;
-    justify-content: center;
-    width: 900px;
-    height: 500px;
-    display: flex;
-    position: relative;
+    /* justify-content: center; */
+    width: 1000px;
+    /* height: 500px; */
+    /* display: flex; */
+    /* position: relative; */
     overflow: hidden;
-    width: 100%;
-
+    /* width: 100%; */
 }
 
 .above-img {
@@ -70,12 +80,19 @@
     margin: 35px 0px 0px
 }
 
-.review-stuff {
-    border-bottom: 1px solid rgb(211,211,211);
-}
-
 .review-button {
+    width: 125px;
     color: black;
+    display: flex;
+    flex-direction: flex-start;
+    /* margin-top: 10px; */
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-top: 40px;
+    margin-left: 55px;
+    padding-left: 7px;
+    background-color: rgb(240,240,240);
 }
 
 
@@ -90,15 +107,128 @@
 .info-card {
     display: block;
     background-color: white;
-    border: 3px solid black;
+    border: 1px solid black;
     border-radius: 20px;
     width: 250px;
-    height: 300px;
+    height: 360px;
     text-decoration: none;
     justify-content: top;
     align-items: right;
     margin: 0px;
-    margin-top: -240px;
+    margin-top: -300px;
     float: right;
-    text-align: center;
+    /* text-align: center; */
+}
+
+.star-rating {
+    float: right;
+    padding-right: 10px;
+    font-size: 18px;
+
+}
+
+.price {
+    float: left;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+.fee-info {
+    padding-top: -12px;
+}
+
+.stay-price1 {
+    padding-top: 100px;
+    padding-left: 10px;
+    font-size: 14px;
+    justify-content: flex-start;
+    text-decoration: underline;
+}
+
+.cleaning-fee {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.cleaning-fee1 {
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.cleaning-fee2 {
+    font-size: 15px;
+}
+
+.service-fee {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.service-fee1 {
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.service-fee2 {
+    font-size: 15px;
+}
+
+.update-button2 {
+    width: 50%;
+    color: black;
+    width: 93px;
+    display: flex;
+    flex-direction: flex-start;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.update-text {
+    padding: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: rgb(240,240,240)
+}
+
+.delete-button2 {
+    width: 50%;
+    color: black;
+    width: 300px;
+    display: flex;
+    flex-direction: flex-start;
+    margin-top: 4px;
+}
+
+.update-delete-div {
+    margin-top: 40px;
+    margin-left: -100px;
+    padding-left: 180px;
+}
+
+.aircover1 {
+    height: 24px
+}
+
+.aircover-text {
+    padding-top: -20px;
+    width: 55%
+}
+
+.aircover-text2 {
+    text-decoration:  underline;
+}
+
+.aircover {
+    border-bottom: 1px solid rgb(211,211,211);
 }

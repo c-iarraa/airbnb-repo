@@ -8,7 +8,7 @@ import SpotDetails from './components/SpotDetails';
 import UpdateSpot from './components/UpdateSpot';
 import CreateSpot from './components/CreateSpot';
 import ReviewsForSpot from "./components/ReviewsForSpot";
-import CreateAReviewModal from './components/CreateAReviewModal';
+import CreateAReview from './components/CreateAReview';
 
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
       {isLoaded && (
          <Switch>
          <Route exact path='/spots/:spotId/review'>
-           <CreateAReviewModal />
+           <CreateAReview />
          </Route>
          <Route exact path='/'>
            <AllSpots />

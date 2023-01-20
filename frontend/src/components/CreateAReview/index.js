@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory,  } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { createReview } from '../../store/reviews';
 import { useModal } from "../../context/Modal";
 import { useParams } from 'react-router-dom';
-import './CreateAReviewModal.css';
+import './CreateAReview.css';
 
 
-
-
-
-const CreateReviewModal = () => {
-  const spotSelectorId = useSelector(state => state.spots.oneSpot.id);
-  // console.log(spotSelector)
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const [errors, setErrors] = useState([]);
-  const [hasSubmitted, setHasSubmitted] = useState(false)
-  const { closeModal } = useModal();
+const CreateReview = () => {
   const {spotId} = useParams()
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const state = useSelector(state => state);
+  console.log(state)
+  let userId;
+    if (state.session.user){
+      userId = state.session.user.id
+    }
 
-    const [review, setReview] = useState('');
-    const [stars, setStars] = useState('');
+  const [errors, setErrors] = useState([]);
+  const [stars, setStars] = useState('');
+  const [review, setReview] = useState('');
 
     // useEffect(() => {
     //   let error = [];
@@ -34,24 +33,29 @@ const CreateReviewModal = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      // setHasSubmitted(true)
-      // if (errors.length > 0) return;
 
     setErrors([])
     const payload = {
+      spotId,
+      userId,
         review,
         stars
       };
       // console.log(payload)
       // console.log(spotForId)
 
-    return dispatch(createReview(spotSelectorId, payload))
-    .then (() => history.push(`/`))
+
+      const dispatched = dispatch(createReview(spotId, payload))
+      // .then (() => history.push(`/api/spots/${spotId}`))
+      .then (() => history.push(`/`))
+
       .catch(async (res) => {
         const data = await res.json();
         if (data.message === '"undefined" is not a valid integer') {
           setErrors('User is only allowed one review per spot')
         };
+
+        // if (data.message === )
 
         if (data && data.errors) {
           setErrors(data.errors);
@@ -61,7 +65,7 @@ const CreateReviewModal = () => {
           setErrors([data.message])
         };
       });
-  }
+      }
 
       return (
         <nav>
@@ -71,7 +75,7 @@ const CreateReviewModal = () => {
             <ul>
               {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>
-              ))}
+                ))}
             </ul>
           {/* )} */}
             <label>
@@ -82,7 +86,7 @@ const CreateReviewModal = () => {
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
                 required
-              />
+                />
             </label>
             <label>
               {/* Stars */}
@@ -94,12 +98,29 @@ const CreateReviewModal = () => {
                 max='5'
                 onChange={(e) => setStars(e.target.value)}
                 required
-              />
+                />
             </label>
             <button className='submit-button' type="submit">Save</button>
           </form>
             </nav>
           )
-}
+        }
 
-    export default CreateReviewModal;
+        export default CreateReview;
+
+        // return dispatch(createReview(spotSelectorId, payload))
+        // .then (() => history.push(`/`))
+        // .catch(async (res) => {
+        //   const data = await res.json();
+        //   if (data.message === '"undefined" is not a valid integer') {
+        //     setErrors('User is only allowed one review per spot')
+        //   };
+
+        //   if (data && data.errors) {
+        //     setErrors(data.errors);
+        //   };
+
+        //   if (data && data.message) {
+        //     setErrors([data.message])
+        //   };
+        //   });

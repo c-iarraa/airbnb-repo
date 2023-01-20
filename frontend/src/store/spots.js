@@ -91,22 +91,24 @@ export const deleteSpot = (spotId) => async dispatch =>{
 export const createSpot = (newInfo)=> async dispatch => {
   const res = await csrfFetch(`/api/spots`, {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newInfo)
   })
   if(res.ok){
     const data = await res.json();
 
-    const res2 = await csrfFetch(`/api/spots/${data.id}/images`,
-    {method: "POST",
+    const res2 = await csrfFetch(`/api/spots/${data.id}/images`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       url: newInfo.imageUrl,
       preview: true
     })
   })
   if(res2.ok){
-    data.previewImage = newInfo.imageUrl
+    // data.previewImage = newInfo.imageUrl
     await dispatch(createSpot(data))
-    console.log(data, 'hello')
+    // console.log(data, 'hello')
     return data
   }
 
@@ -175,19 +177,23 @@ const spotReducer = (state = initialState, action) => {
             newState.oneSpot = action.oneSpot
             return newState
         }
-
       case CREATE_SPOT: {
-        const newState = {...state, allSpots: {...state.allSpots}};
-        if (Array.isArray (action.payload)) {
-            action.payload.forEach(spot => {
-                newState.allSpots[spot.id] = spot
-            })
-        }else {
-            newState.allSpots[action.payload.id] = action.payload
-          }
-          console.log(newState, '12345')
-          return newState
-        }
+        const newState = {...state};
+        const allSpotsCopy = {...state.allSpots};
+        allSpotsCopy[action.spot.id] = action.spot
+        newState.allSpots = allSpotsCopy
+        return newState
+        // const newState = {...state, allSpots: {...state.allSpots}};
+        // if (Array.isArray (action.payload)) {
+        //     action.payload.forEach(spot => {
+        //         newState.allSpots[spot.id] = spot
+        //     })
+        // }else {
+        //     newState.allSpots[action.payload.id] = action.payload
+        //   }
+        //   console.log(newState, '12345')
+        //   return newState
+      }
       case UPDATE_SPOT: {
         const newState = { ...state, allSpots: { ...state.allSpots}}
         newState.allSpots[action.spot.id] = action.spot;

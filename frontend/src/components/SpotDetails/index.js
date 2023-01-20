@@ -12,12 +12,21 @@ const SpotDetails = () => {
     const history = useHistory();
     const spotSelector = useSelector(state => state.spots.oneSpot);
     const sessionId = useSelector(state => state.session.user?.id) //session user id
-    const reviewId = useSelector(state => state.reviews.allReviews);
+    const review = useSelector(state => state.reviews.spot);
     const [validationErrors, setValidationErrors] = useState([]);
-    const reviews = Object.values(reviewId)
+    const reviews = Object.values(review)
     // console.log(sessionId, 'hiiiiiii')
 
-    const spotArr = Object.values(spotSelector)
+    console.log('reviews object', review)
+
+    const spotSpecific = Object?.values(review)
+    console.log('specific spot', spotSpecific)
+
+
+    const spotReview = spotSpecific.filter(element => element.spotId === spotId)
+
+    console.log(spotSpecific, "adsfasdf")
+    // const spotArr = Object.values(spotSelector)
 
 
     const handleSubmit = async (e) => {
@@ -27,12 +36,14 @@ const SpotDetails = () => {
 
 
     useEffect(() => {
-        dispatch(getSpot(spotId))
-    }, [spotId]);
-
-    useEffect(() => {
         dispatch(getReviews(spotId))
-    }, [spotId]);
+        .then(() => dispatch(getSpot(spotId)))
+    }, [spotId, dispatch]);
+
+    // useEffect(() => {
+    //     dispatch(getReviews(spotId))
+    //     .then() =>
+    // }, [spotId]);
 
 
     if (!spotSelector.SpotImages) return null;
@@ -52,14 +63,16 @@ const SpotDetails = () => {
 
     // const deleteReview = (e) => {
     //     e.preventDefault()
-    //     return dispatch(deleteReview(spotId))
+    //     return dispatch(deleteReview(usersReview.id))
     //     // history.push('/')
+    //     // return dispatch(deleteReview(review.id))
+
     // }
 
 
 
 
-      return (
+      return review && spotSpecific && spotSpecific &&(
         <nav>
             <div className='detailsDiv'>
             <ul className="review-errors">
@@ -69,7 +82,7 @@ const SpotDetails = () => {
             </ul>
             <div className='above-img'>
                 <h1 className='description' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{spotSelector.description}</h1>
-                <h4 className='description2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i>{spotSelector.avgStarRating} · {spotSelector.numReviews} reviews · Superhost · {spotSelector.city}, {spotSelector.state}, {spotSelector.country}</h4>
+                <h4 className='description2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i> {spotSelector.avgStarRating} · {spotSelector.numReviews} reviews · Superhost · {spotSelector.city}, {spotSelector.state}, {spotSelector.country}</h4>
                 </div>
                 <div className='image-container'>
                     {spotSelector.SpotImages.map((image) => (
@@ -93,10 +106,53 @@ const SpotDetails = () => {
                     <div className='cancellation'>
                         <h4 style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-regular fa-calendar fa-xl"></i> Free cancellation for 48 hours.</h4>
                     </div>
+
                     <div className='info-card'>
-                        <h1 className='star-rating'><i class="fa-sharp fa-solid fa-star"></i>{spotSelector.avgStarRating}</h1>
-                        <h1 className='price'>${spotSelector.price} a night</h1>
+                        <h1 className='star-rating' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i> {spotSelector.avgStarRating}</h1>
+                        <h1 className='price' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>${spotSelector.price} a night</h1>
+                            <div className='review-features-div'>
+                                {(spotSelector.ownerId !== sessionId) &&
+                                <div>
+                                    <div className='review-button'>
+                                        <NavLink className='review-text' to={`/spots/${spotId}/review`} style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}}>Create A Review</NavLink>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                            <div className='update-delete-div'>
+                                {(spotSelector.ownerId === sessionId) &&
+                                <div>
+                                    <div className='update-button2'>
+                                        <NavLink className='update-text' style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}} to={`/spots/${spotSelector.id}/update`}>Update Spot</NavLink>
+                                    </div>
+                                    <div className='delete-button2'>
+                                        <button onClick={deleteSpecificSpot} style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Delete Spot</button>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                            <div className='fee-info'>
+                                <div className='stay-price'>
+                                    <h1 className='stay-price1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>${spotSelector.price} x 5 nights</h1>
+                                    {/* <h1 className='stay-price2'>${spotSelector.price ** 5}/h1> */}
+                                </div>
+                                <div className='cleaning-fee'>
+                                    <h1 className='cleaning-fee1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Cleaning fee</h1>
+                                    <h1 className='cleaning-fee2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>$60</h1>
+                                </div>
+                                <div className='service-fee'>
+                                    <h1 className='service-fee1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Service fee</h1>
+                                    <h1 className='service-fee2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>$120</h1>
+                                </div>
+                            </div>
                     </div>
+                    </div>
+                    <div className='aircover'>
+                        <h2 className='aircover-img'>
+                            <img className="aircover1" src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg" alt="AirCover"/>
+                        </h2>
+                        <h4 className='aircover-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><small>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</small></h4>
+                        <h4 className='aircover-text2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Learn more</h4>
                     </div>
                 </div>
                 <div className='review-stuff'>
@@ -104,52 +160,53 @@ const SpotDetails = () => {
                     <h2 className='reviews-tag' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Reviews</h2>
                 </div>
                 <ul className="spot-reviews">
-                    {reviews.map(review => (
+                    {spotSpecific?.length ? spotSpecific?.map(review => (
 
                             <div className = 'review-values' key={review.id}>
-                                <h3 className='review-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{review.review}</h3>
-                                <h3 className='review-stars' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{review.stars}</h3>
+                                <h3 className='review-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{review.User.firstName}:  {review.review}</h3>
+                                <h3 className='review-stars' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>star rating: {review.stars}</h3>
                                 <div className = 'delete-review-button'>
-                                    {(review.userId === sessionId) &&
-                                        <div>
+                                    {(review?.userId === sessionId) &&
                                             <div>
-                                                <button onClick={ async (e) => {
+                                                <button onClick={
+                                                    async (e) => {
                                                     e.preventDefault();
-                                                    const deletedReview = await dispatch((deleteReview(review.id)))
-                                                    // if (deletedReview) history.push(`/`)
-                                                    .then (() => history.push('/'))
-                                                }}>Delete Review</button>
+
+                                                    return dispatch(deleteReview(review.id))
+                                                    .then (() => history.push(`/`))
+                                                }
+                                            }
+                                                >Delete Review</button>
                                             </div>
-                                        </div>
                                     }
                                 </div>
                             </div>
-                        ))
+                        )) : <div style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>No reviews at this time</div>
                     }
                 </ul>
-                <div className='review-features-div'>
+                {/* <div className='review-features-div'>
                     {(spotSelector.ownerId !== sessionId) &&
                     <div>
                         <div className='review-button'>
-                            <NavLink to={`/spots/${spotId}/review`} style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}}>Create A Review</NavLink>
+                            <button to={`/spots/${spotId}/review`} style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}}>Create A Review</button>
                         </div>
                     </div>
                 }
-                </div>
+                </div> */}
             </div>
             </div>
-                <div className='update-delete-div'>
+                {/* <div className='update-delete-div'>
                     {(spotSelector.ownerId === sessionId) &&
                     <div>
                         <div>
-                            <NavLink style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}} to={`/spots/${spotSelector.id}/update`}>Update Spot</NavLink>
+                            <button style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}} to={`/spots/${spotSelector.id}/update`}>Update Spot</button>
                         </div>
                         <div>
-                            <button onClick={deleteSpecificSpot}>Delete Spot</button>
+                            <button onClick={deleteSpecificSpot} style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Delete Spot</button>
                         </div>
                     </div>
                     }
-                </div>
+                </div> */}
         </nav>
         )
         }
