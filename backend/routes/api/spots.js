@@ -184,7 +184,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
 
 //GET REVIEWS BY SPOT ID
-router.get('/:spotId/reviews', requireAuth, async(req, res)=> {
+router.get('/:spotId/reviews', async(req, res)=> {
     const spotId = req.params.spotId;
     const selectedReview = await Review.findAll({
       where: {
@@ -200,12 +200,12 @@ router.get('/:spotId/reviews', requireAuth, async(req, res)=> {
       ]
     });
 
-    if(!selectedReview.length){
-      res.status(404).json({
-        "message": "Spot couldn't be found",
-        "statusCode": 404
-      });
-    }
+    // if(!selectedReview.length){
+    //   res.status(404).json({
+    //     "message": "Spot couldn't be found",
+    //     "statusCode": 404
+    //   });
+    // }
 
 
     let reviewsList = []

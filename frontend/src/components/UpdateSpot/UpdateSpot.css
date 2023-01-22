@@ -15,13 +15,14 @@
 .UpdateSpotContainer{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     width: 630px;
     align-items: center;
     /* margin: 16px 0px 40px; */
     margin: auto;
     padding: none;
-    width: 400px
+    width: 400px;
+    align-items: flex-start;
 
   }
 
@@ -42,3 +43,7 @@ h2 {
     transition : background-color 0.5s ease 0s;
     color: white;
 }
+
+/* .placeholders {
+    padding-right: 350px
+} */

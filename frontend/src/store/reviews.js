@@ -112,13 +112,15 @@ export const getReviews = (spotId) => async (dispatch) =>{
       case LOAD_REVIEWS:{
         //console.log("In LOAD_REVIEWS, state: ", state)
         //console.log('actionreviews+++++',action.reviews)
-        let newState = { spot:{}, user:{} }
+        let newState = {  ...state, spot:{} }
+        newState.reviewList = action.reviewList.Reviews
+        return newState
 
-        action.reviewList.Reviews.forEach(review => {
-          newState.spot[review.id] = review
-        })
-        //console.log("In LOAD_REVIEWS, newState: ", newState)
-        return newState;
+        // action.reviewList.Reviews.forEach(review => {
+        //   newState.spot = action.spot
+        // })
+        // //console.log("In LOAD_REVIEWS, newState: ", newState)
+        // return newState;
       }
 
       case CREATE_REVIEW:{

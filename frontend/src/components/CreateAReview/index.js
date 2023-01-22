@@ -12,7 +12,6 @@ const CreateReview = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const state = useSelector(state => state);
-  console.log(state)
   let userId;
     if (state.session.user){
       userId = state.session.user.id
@@ -46,16 +45,14 @@ const CreateReview = () => {
 
 
       const dispatched = dispatch(createReview(spotId, payload))
-      // .then (() => history.push(`/api/spots/${spotId}`))
-      .then (() => history.push(`/`))
+      .then (() => history.push(`/api/spots/${spotId}`))
+      // .then (() => history.push(`/`))
 
-      .catch(async (res) => {
+      .catch( async (res) => {
         const data = await res.json();
         if (data.message === '"undefined" is not a valid integer') {
           setErrors('User is only allowed one review per spot')
         };
-
-        // if (data.message === )
 
         if (data && data.errors) {
           setErrors(data.errors);

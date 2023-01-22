@@ -31,7 +31,7 @@ const CreateSpotModal = () => {
 
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
     setErrors([])
 
@@ -48,7 +48,6 @@ const CreateSpotModal = () => {
         ownerId,
         imageUrl
       };
-      console.log(payload)
 
       // const image = {
       //   url: imageUrl,
@@ -64,7 +63,7 @@ const CreateSpotModal = () => {
         if (data && data.errors) setErrors(data.errors)
     }
     )
-    .then (() => history.push('/'))
+    // .then (() => history.push('/'))
     // if (test) history.push('/')
   }
 

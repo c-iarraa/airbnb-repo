@@ -5,7 +5,6 @@
 }
 
 
-
 .login-button {
 
     background: rgb(230, 30, 77);
@@ -42,3 +41,7 @@
     font-size: 16px;
     font-weight: 800;
 }
+
+/* .form {
+    height: 400px
+} */

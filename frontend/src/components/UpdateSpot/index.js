@@ -70,6 +70,7 @@ const UpdateSpot  = ({ spot }) => {
         <div className='update-spot-header'>
           <h2 style={{ fontFamily: 'Geneva, Verdana, sans-serif' }}>Update a Spot</h2>
         </div>
+        <div className='placeholders'>Address:</div>
         <input className ='update-inputs'
           type="text"
           placeholder="Address"
@@ -77,12 +78,14 @@ const UpdateSpot  = ({ spot }) => {
           required
           value={address}
           onChange={updateAddress} />
+          <div className='placeholders'>City:</div>
         <input className ='update-inputs'
           type="text"
           placeholder="City"
           required
           value={city}
           onChange={updateCity} />
+          <div className='placeholders'>State:</div>
         <input className ='update-inputs'
           type="text"
           placeholder="State"
@@ -91,6 +94,7 @@ const UpdateSpot  = ({ spot }) => {
           required
           value={state}
           onChange={updateState} />
+          <div className='placeholders'>Country:</div>
         <input className ='update-inputs'
           type="text"
           placeholder="Country"
@@ -106,16 +110,19 @@ const UpdateSpot  = ({ spot }) => {
           placeholder="Lng"
           value={lng}
           onChange={updateLng} /> */}
+          <div className='placeholders'>Name:</div>
         <input className ='update-inputs'
           type="text"
           placeholder="Name"
           value={name}
           onChange={updateName} />
+          <div className='placeholders'>Description:</div>
         <input className ='update-inputs'
           type="text"
           placeholder="Description"
           value={description}
           onChange={updateDescription} />
+          <div className='placeholders'>Price:</div>
         <input className ='update-inputs'
           type="number"
           placeholder="Price"

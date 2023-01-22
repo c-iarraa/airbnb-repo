@@ -12,21 +12,8 @@ const SpotDetails = () => {
     const history = useHistory();
     const spotSelector = useSelector(state => state.spots.oneSpot);
     const sessionId = useSelector(state => state.session.user?.id) //session user id
-    const review = useSelector(state => state.reviews.spot);
+    const review = useSelector(state => state.reviews.reviewList);
     const [validationErrors, setValidationErrors] = useState([]);
-    const reviews = Object.values(review)
-    // console.log(sessionId, 'hiiiiiii')
-
-    console.log('reviews object', review)
-
-    const spotSpecific = Object?.values(review)
-    console.log('specific spot', spotSpecific)
-
-
-    const spotReview = spotSpecific.filter(element => element.spotId === spotId)
-
-    console.log(spotSpecific, "adsfasdf")
-    // const spotArr = Object.values(spotSelector)
 
 
     const handleSubmit = async (e) => {
@@ -34,16 +21,14 @@ const SpotDetails = () => {
     }
 
 
+    useEffect(() => {
+        dispatch(getSpot(spotId))
+   }, [spotId, dispatch]);
 
     useEffect(() => {
         dispatch(getReviews(spotId))
-        .then(() => dispatch(getSpot(spotId)))
     }, [spotId, dispatch]);
 
-    // useEffect(() => {
-    //     dispatch(getReviews(spotId))
-    //     .then() =>
-    // }, [spotId]);
 
 
     if (!spotSelector.SpotImages) return null;
@@ -72,7 +57,7 @@ const SpotDetails = () => {
 
 
 
-      return review && spotSpecific && spotSpecific &&(
+      return review &&(
         <nav>
             <div className='detailsDiv'>
             <ul className="review-errors">
@@ -160,17 +145,22 @@ const SpotDetails = () => {
                     <h2 className='reviews-tag' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Reviews</h2>
                 </div>
                 <ul className="spot-reviews">
-                    {spotSpecific?.length ? spotSpecific?.map(review => (
+                    {review.length ? review?.map(review => (
 
                             <div className = 'review-values' key={review.id}>
-                                <h3 className='review-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{review.User.firstName}:  {review.review}</h3>
-                                <h3 className='review-stars' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>star rating: {review.stars}</h3>
+                                <div className='review-spot'>
+                                <div className='user-review'>
+                                    <h3 className='review-user' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-solid fa-user"></i> {review.User.firstName} {review.User.lastName}</h3>
+                                </div>
+                                <h4 className='review-stars' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i> {review.stars}</h4>
+                                <h3 className='review-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{review.review}</h3>
                                 <div className = 'delete-review-button'>
                                     {(review?.userId === sessionId) &&
                                             <div>
                                                 <button onClick={
                                                     async (e) => {
                                                     e.preventDefault();
+
 
                                                     return dispatch(deleteReview(review.id))
                                                     .then (() => history.push(`/`))
@@ -180,33 +170,14 @@ const SpotDetails = () => {
                                             </div>
                                     }
                                 </div>
+                                </div>
                             </div>
-                        )) : <div style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>No reviews at this time</div>
+                        ))
+                        : <div style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Be the first to create a review!</div>
                     }
                 </ul>
-                {/* <div className='review-features-div'>
-                    {(spotSelector.ownerId !== sessionId) &&
-                    <div>
-                        <div className='review-button'>
-                            <button to={`/spots/${spotId}/review`} style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}}>Create A Review</button>
-                        </div>
-                    </div>
-                }
-                </div> */}
             </div>
             </div>
-                {/* <div className='update-delete-div'>
-                    {(spotSelector.ownerId === sessionId) &&
-                    <div>
-                        <div>
-                            <button style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}} to={`/spots/${spotSelector.id}/update`}>Update Spot</button>
-                        </div>
-                        <div>
-                            <button onClick={deleteSpecificSpot} style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Delete Spot</button>
-                        </div>
-                    </div>
-                    }
-                </div> */}
         </nav>
         )
         }
