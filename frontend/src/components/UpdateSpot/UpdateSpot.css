@@ -11,6 +11,11 @@
     margin:0px;
 }
 
+.update^{
+    width:90%;
+
+
+}
 
 .UpdateSpotContainer{
     display: flex;
@@ -22,7 +27,7 @@
     margin: auto;
     padding: none;
     width: 400px;
-    align-items: flex-start;
+    /* align-items: flex-start; */
 
   }
 
@@ -44,6 +49,8 @@ h2 {
     color: white;
 }
 
-/* .placeholders {
-    padding-right: 350px
-} */
+.placeholders {
+    padding-right: 350px;
+    display: flex;
+    align-items: flex-start;
+}

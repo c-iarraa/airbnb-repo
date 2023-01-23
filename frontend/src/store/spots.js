@@ -106,9 +106,8 @@ export const createSpot = (newInfo)=> async dispatch => {
     })
   })
   if(res2.ok){
-    // data.previewImage = newInfo.imageUrl
-    await dispatch(createSpot(data))
-    // console.log(data, 'hello')
+    data.previewImage = newInfo.imageUrl
+    dispatch(create(data))
     return data
   }
 
@@ -178,21 +177,16 @@ const spotReducer = (state = initialState, action) => {
             return newState
         }
       case CREATE_SPOT: {
-        const newState = {...state};
-        const allSpotsCopy = {...state.allSpots};
-        allSpotsCopy[action.spot.id] = action.spot
-        newState.allSpots = allSpotsCopy
-        return newState
-        // const newState = {...state, allSpots: {...state.allSpots}};
-        // if (Array.isArray (action.payload)) {
-        //     action.payload.forEach(spot => {
-        //         newState.allSpots[spot.id] = spot
-        //     })
-        // }else {
-        //     newState.allSpots[action.payload.id] = action.payload
-        //   }
-        //   console.log(newState, '12345')
-        //   return newState
+        const newState = {...state, allSpots: {...state.allSpots}};
+        if (Array.isArray (action.payload)) {
+            action.payload.forEach(spot => {
+                newState.allSpots[spot.id] = spot
+            })
+        }else {
+            newState.allSpots[action.payload.id] = action.payload
+          }
+          console.log(newState, '12345')
+          return newState
       }
       case UPDATE_SPOT: {
         const newState = { ...state, allSpots: { ...state.allSpots}}

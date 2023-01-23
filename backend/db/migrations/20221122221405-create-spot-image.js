@@ -24,7 +24,7 @@ module.exports = {
       url: {
         allowNull: false,
         type: Sequelize.STRING,
-        unique: true
+        // unique: true
       },
       preview: {
         allowNull: false,

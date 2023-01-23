@@ -54,18 +54,24 @@ const CreateSpotModal = () => {
       //   preview: true,
       // };
 
-    return dispatch(createSpot(payload))
-    .then(() => dispatch(AllSpots()))
-    .then (() => history.push('/'))
-    .catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors)
+      return dispatch(createSpot(payload))
+      // .then(() => dispatch(AllSpots()))
+      .then (() => history.push('/'))
+      .catch(
+        async (res) => {
+          if (!res.ok) {
+            const data = await res.json();
+            if (data && data.errors) setErrors(data.errors);
+
+
+          }
+      }
+      )
+      // if(!errors) console.log('meow')
+      // .then (() => history.push('/'))
+      // history.push('/')
     }
-    )
-    // .then (() => history.push('/'))
-    // if (test) history.push('/')
-  }
+
 
     // const handleCancelClick = (e) => {
     //     e.preventDefault();

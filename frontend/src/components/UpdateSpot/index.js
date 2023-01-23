@@ -52,7 +52,7 @@ const UpdateSpot  = ({ spot }) => {
         };
 
     const updatedSpot = await dispatch((updateSpot(updatingSpot)))
-    .then (() => history.push(`/api/spots/${spotId}`))
+    .then (() => history.push(`/spots/${spotId}`))
     // if (updatedSpot) {
     //   history.push('/')
     // }
@@ -70,7 +70,9 @@ const UpdateSpot  = ({ spot }) => {
         <div className='update-spot-header'>
           <h2 style={{ fontFamily: 'Geneva, Verdana, sans-serif' }}>Update a Spot</h2>
         </div>
-        <div className='placeholders'>Address:</div>
+        {/* <div className='placeholders'>Address:</div> */}
+        <label>
+        Address:
         <input className ='update-inputs'
           type="text"
           placeholder="Address"
@@ -78,14 +80,24 @@ const UpdateSpot  = ({ spot }) => {
           required
           value={address}
           onChange={updateAddress} />
-          <div className='placeholders'>City:</div>
+          </label>
+
+          {/* <div className='placeholders'>City:</div> */}
+        <label>
+          City:
         <input className ='update-inputs'
           type="text"
           placeholder="City"
           required
           value={city}
-          onChange={updateCity} />
-          <div className='placeholders'>State:</div>
+          onChange={updateCity}
+          />
+          </label>
+
+
+          {/* <div className='placeholders'>State:</div> */}
+        <label>
+          State:
         <input className ='update-inputs'
           type="text"
           placeholder="State"
@@ -94,12 +106,18 @@ const UpdateSpot  = ({ spot }) => {
           required
           value={state}
           onChange={updateState} />
-          <div className='placeholders'>Country:</div>
+          </label>
+
+          {/* <div className='placeholders'>Country:</div> */}
+          <label>
+          Country:
         <input className ='update-inputs'
           type="text"
           placeholder="Country"
           value={country}
           onChange={updateCountry} />
+         </label>
+
         {/* <input className ='update-inputs'
           type="number"
           placeholder="Lat"
@@ -110,24 +128,40 @@ const UpdateSpot  = ({ spot }) => {
           placeholder="Lng"
           value={lng}
           onChange={updateLng} /> */}
-          <div className='placeholders'>Name:</div>
+
+
+          {/* <div className='placeholders'>Name:</div> */}
+          <label>
+            Name:
         <input className ='update-inputs'
           type="text"
           placeholder="Name"
           value={name}
           onChange={updateName} />
-          <div className='placeholders'>Description:</div>
+          </label>
+
+
+          {/* <div className='placeholders'>Description:</div> */}
+          <label>
+          Description:
+
         <input className ='update-inputs'
           type="text"
           placeholder="Description"
           value={description}
           onChange={updateDescription} />
-          <div className='placeholders'>Price:</div>
+          </label>
+
+          {/* <div className='placeholders'>Price:</div> */}
+          <label>
+          Price:
         <input className ='update-inputs'
           type="number"
           placeholder="Price"
           value={price}
           onChange={updatePrice} />
+          </label>
+
           {/* <input className ='update-inputs'
           type="text"
           placeholder="Url Image"
