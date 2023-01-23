@@ -1,7 +1,7 @@
 .update-inputs {
-/* display: block;
+display: block;
     width: 400px;
-    margin: 15px */
+    margin: 15px;
     display: block;
     border: auto;
     width:90%;
@@ -42,7 +42,8 @@ h2 {
     border-radius: 5px;
     border-color: rgb(160,160,160);
     font-weight: 700px;
-    width: 95%;
+    width: 58%;
+    margin-left: 19px;
     margin-top: 40px;
     font-family: Geneva, Verdana, sans-serif;
     transition : background-color 0.5s ease 0s;

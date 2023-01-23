@@ -45,7 +45,7 @@ const CreateReview = () => {
 
 
       const dispatched = dispatch(createReview(spotId, payload))
-      .then (() => history.push(`/spots/${spotId}`))
+      .then (() => history.push(`/api/spots/${spotId}`))
       // .then (() => history.push(`/`))
 
       .catch( async (res) => {

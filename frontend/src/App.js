@@ -32,7 +32,7 @@ function App() {
          <Route exact path='/spots/:spotId/update'>
            <UpdateSpot />
          </Route>
-         <Route exact path='/spots/:spotId'>
+         <Route exact path='/api/spots/:spotId'>
            <SpotDetails />
          </Route>
          <Route exact path='/spots/new'>
