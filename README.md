@@ -7,7 +7,7 @@ LairBnb : API Documentation
 
 Live Deployment link: [https://airbnb-hxjd.onrender.com]
 
-Live Wiki Link: [https://github.com/D0RK5TER/earthRnR/wiki]
+Live Wiki Link: [https://github.com/c-iarraa/airbnb-repo.wiki.git]
 
 ## Project was made using:
 
