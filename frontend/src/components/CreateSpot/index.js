@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { createSpot } from '../../store/spots';
+import { useHistory } from "react-router-dom";
+ import { createSpot } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 import  AllSpots  from '../AllSpots/index.js';
 import './CreateSpot.css';

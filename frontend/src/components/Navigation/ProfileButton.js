@@ -5,11 +5,13 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import DemoUserModal from '../DemoUserModal';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const history = useHistory()
 
   const openMenu = () => {
     if (showMenu) return;
@@ -51,12 +53,17 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
+            <p>{user.username}</p>
+            <p>{user.firstName} {user.lastName}</p>
+            <p className='user-email'>{user.email}</p>
+
+            <p>
+              <button className='logout-button' onClick={() => history.push('/bookings').then({closeMenu})}>Bookings</button>
+            </p>
+
+            <p>
+              <button className='logout-button' onClick={logout}>Log Out</button>
+            </p>
           </>
         ) : (
           <>
@@ -71,7 +78,7 @@ function ProfileButton({ user }) {
               modalComponent={<SignupFormModal />}
             />
             <OpenModalMenuItem
-              itemText="Demo User Login"
+              itemText="Demo User"
               onItemClick={closeMenu}
               modalComponent={<DemoUserModal />}
             />

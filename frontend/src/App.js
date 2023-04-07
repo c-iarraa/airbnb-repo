@@ -9,6 +9,7 @@ import UpdateSpot from './components/UpdateSpot';
 import CreateSpot from './components/CreateSpot';
 import ReviewsForSpot from "./components/ReviewsForSpot";
 import CreateAReview from './components/CreateAReview';
+import SessionBookings from "./components/Bookings";
 
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
          <Route exact path='/spots/:spotId/reviews'>
            <ReviewsForSpot />
          </Route>
+         <Route exact path='/bookings'>
+            <SessionBookings/>
+          </Route>
        </Switch>
       )}
     </>

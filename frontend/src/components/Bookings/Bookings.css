@@ -1,0 +1,127 @@
+.previous-bookings-title {
+    font-size: 22px;
+    color: #222222;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
+
+
+.image-booking {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.bookingCard {
+    padding: 20px;
+    display: flex;
+}
+
+.booking-city-date {
+    padding-left: 10px;
+}
+
+
+.date-booking {
+    color: #717171;
+    font-size: 14px;
+    font-weight: 400;
+    line-clamp: 1;
+    line-height: 18px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+
+}
+
+.city-booking-title {
+    color: #222222;
+    font-size: 16px;
+    font-weight: 600;
+    line-clamp: 1;
+    line-height: 20px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.bookings-container {
+    width: 1300px;
+    margin: 0 auto;
+}
+
+.all-bookings {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(241px, 265px));
+    column-gap: 32px;
+    row-gap: 10px;
+    grid-auto-flow: row dense;
+    list-style: none;
+    padding-bottom: 20px;
+}
+
+
+.cancel-booking-button {
+    background-color: transparent;
+    border: 0 transparent;
+}
+
+
+.trips-title-bookings {
+    color: #222222;
+    font-size: 32px;
+    font-weight: 500;
+    line-clamp: 1;
+    line-height: 36px;
+    font-family: Helvetica;
+}
+
+.book-a-spot-container{
+    margin-top: 15px;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 12px;
+    height: 288px;
+    font-family: Helvetica;
+}
+
+.img-no-booking-picture{
+    width: 800px;
+    height: 288px;
+    object-fit: cover;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.book-a-spot-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-left-booking-banner{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 32px;
+}
+
+.text-in-text-left-banner{
+    color: #717171;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+
+.fa-thumbtack{
+    color: #E00B41;
+}
+
+
+.no-bookings-button{
+    color: white;
+    background-color: #E00B41;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    width: 150px;
+    height: 48px;
+    border: 0 transparent;
+    border-radius: 13px;
+}

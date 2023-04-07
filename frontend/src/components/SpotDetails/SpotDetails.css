@@ -117,6 +117,15 @@
     margin: 20px;
     margin-top: -300px;
     float: right;
+    /* position: sticky;
+    height: fit-content;
+    text-align: center;
+    border-radius: 12px;
+    width: 300px;
+    margin-top: 49px;
+    padding: 15px;
+    border: 1px solid rgb(221, 221, 221);
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px; */
 }
 
 .star-rating {
@@ -251,4 +260,64 @@
 
 .review-spot {
     border-bottom: 1px solid rgb(211,211,211);
+}
+
+.booking-form{
+    padding: 0;
+    display: flex;
+    position: relative;
+}
+
+.date-fields{
+    display: flex;
+    justify-content: center;
+    border: rgb(176,176,176) solid 1px;
+    border-radius: 15px;
+}
+
+.calenderinputone{
+    width: 135px;
+    border: 0 transparent;
+}
+
+.calenderinputtwo{
+    width: 135px;
+    padding-left: 2px;
+    border: 0 transparent;
+    border-left: rgb(176,176,176) solid 1px;
+}
+
+.submit-booking-details{
+    padding-top: 15px;
+    position: relative;
+}
+
+.submit-button-booking{
+    border: transparent;
+    width: 192px;
+    height: 48px;
+    border-radius: 5px;
+    background-color: #E00B41;
+    color:white;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif ;
+    /* top: 50px; */
+}
+
+.booking-div {
+    /* position: absolute; */
+    height: fit-content;
+    /* text-align: center; */
+    /* border-radius: 12px; */
+    width: 300px;
+    /* margin-top: 49px; */
+    margin-top: -25px;
+    padding: 15px;
+    right: 200px;
+    /* border: 1px solid rgb(221, 221, 221); */
+    /* box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    position: absolute;
+    display: flex;
+
 }

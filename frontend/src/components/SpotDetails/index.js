@@ -3,6 +3,7 @@ import { useParams, NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpot, deleteSpot } from '../../store/spots'
 import { getReviews, createReview, deleteReview } from '../../store/reviews';
+import { postBookingThunk } from '../../store/booking'
 import './SpotDetails.css';
 
 
@@ -13,11 +14,59 @@ const SpotDetails = () => {
     const spotSelector = useSelector(state => state.spots.oneSpot);
     const sessionId = useSelector(state => state.session.user?.id) //session user id
     const review = useSelector(state => state.reviews.reviewList);
+    const sessionUser = useSelector(state => state.session.user)
+    const currentSession = useSelector(state => state)
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
     const [validationErrors, setValidationErrors] = useState([]);
+    const [errors, setErrors] = useState([])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const dataErrors = [];
+
+        if (!sessionUser) dataErrors.push('Must be signed in to book')
+        if (sessionUser && sessionUser.id === spotSelector.ownerId) dataErrors.push("Can't book your own spot")
+
+
+        const splitStart = startDate.split('-')
+        const splitEnd = endDate.split('-')
+
+        const startYear = Number(splitStart[0])
+        const startMonth = Number(splitStart[1])
+        const startDay = Number(splitStart[2])
+
+        const endYear = Number(splitEnd[0])
+        const endMonth = Number(splitEnd[1])
+        const endDay = Number(splitEnd[2])
+
+        if (endYear < startYear) dataErrors.push("End date can't be before start date")
+        if (endMonth < startMonth) dataErrors.push("End date can't be before start date")
+        if (endDay <= startDay) dataErrors.push("End date can't be before or on the  start date")
+
+        if (dataErrors.length) {
+            setErrors(dataErrors)
+        } else {
+
+            const bookingData = {
+                startDate,
+                endDate
+            }
+
+
+            const postBooking = await dispatch(postBookingThunk(spotId, bookingData)).catch(
+                async (res) => {
+                    const data = await res.json()
+                    if (data && data.errors) setErrors(Object.values(data.errors))
+                    // console.log('#$&(*#@&$*(32', Object.values(data.errors))
+                }
+            )
+
+            if (postBooking) {
+                history.push('/bookings')
+            }
+        }
     }
 
 
@@ -116,10 +165,52 @@ const SpotDetails = () => {
                                 </div>
                                 }
                             </div>
+
+
+                            <div className='booking-div'>
+                                {sessionUser &&
+                                <form className='booking-form' onSubmit={handleSubmit} method="post">
+                                        <ul>
+                                            {errors.map((error, idx) => (
+                                                <li key={idx}>{error}</li>
+                                            ))}
+                                        </ul>
+                                    <div className='date-fields'>
+                                        <div>
+                                            <input
+                                                className='calenderinputone'
+                                                type='date'
+                                                required
+                                                onChange={(e) => setStartDate(e.target.value)}
+                                                value={startDate}
+                                                min={new Date().toISOString().split('T')[0]}
+
+                                            />
+                                        </div>
+                                        <div>
+
+                                            <input
+                                                className='calenderinputtwo'
+                                                required
+                                                type='date'
+                                                onChange={(e) => setEndDate(e.target.value)}
+                                                value={endDate}
+                                                min={new Date().toISOString().split('T')[0]}
+
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className='submit-booking-details'><button type='submit' className='submit-button-booking'>Reserve</button></div>
+
+                                </form>
+                                }
+                            </div>
+
+
                             <div className='fee-info'>
                                 <div className='stay-price'>
                                     <h1 className='stay-price1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>${spotSelector.price} x 5 nights</h1>
-                                    {/* <h1 className='stay-price2'>${spotSelector.price ** 5}/h1> */}
                                 </div>
                                 <div className='cleaning-fee'>
                                     <h1 className='cleaning-fee1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Cleaning fee</h1>
@@ -180,6 +271,6 @@ const SpotDetails = () => {
             </div>
         </nav>
         )
-        }
+    }
 
-        export default SpotDetails;
+export default SpotDetails;

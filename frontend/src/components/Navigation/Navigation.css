@@ -1,6 +1,10 @@
 .hidden {
     display: none;
-  }
+}
+
+/* .html {
+    width: 1024px;
+} */
 
 .top-right {
     display: flex;
@@ -23,8 +27,15 @@
     /* margin: auto; */
 }
 
-.create-spot-link{
+.create-spot-link {
+    position: absolute;
     color: black;
+    right: 85px;
+}
+
+.user-email {
+    border-bottom: 1px solid rgb(211,211,211);
+    padding-bottom: 8px;
 }
 
 .home-button{
@@ -42,19 +53,38 @@
 }
 
 .profile-button-combined {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between; */
+    display: inline-flex;
+    align-items: center;
+}
+
+.profile-dropdown {
+    position: absolute;
+    background-color: white;
+    width: 100px;
+    right: 20px;
+    top: 100px;
+    box-shadow: 0px 1px 12px rgb(166, 162, 162);
+    border-radius: 10px;
+    font-family: Helvetica;
+    justify-content: center;
+    padding-right: 40px;
 }
 
 .profile-button {
+  position: absolute;
   font-size: 14px;
   border-radius: 30px;
-  width: 109%;
+  right: 20px;
+  top: 30px;
+  /* width: 109%; */
   padding: 8px;
+  margin-bottom: 15px;
   cursor: pointer;
   background-color: rgb(255, 255, 255);
-  margin-right: 5px;
+  /* margin-right: 5px; */
   box-shadow: 0px 0px 0px #e0dfdf;
   transition: box-shadow 0.3s ease-in-out;
   border: 2px solid rgb(220, 220, 220);
@@ -70,4 +100,17 @@
 
 .fa-user-circle {
     color: rgb(101, 101, 101);
+}
+
+.logout-button {
+    border: transparent;
+    background-color: white;
+    font-size: 16px;
+    left: -40px;
+  }
+
+.logout-button:hover {
+    background-color: rgb(232,232,232);
+    padding: 5px;
+    border-radius: 5px;
 }
