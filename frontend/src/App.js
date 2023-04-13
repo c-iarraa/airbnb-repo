@@ -13,42 +13,44 @@ import SessionBookings from "./components/Bookings";
 
 
 function App() {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+ const dispatch = useDispatch();
+ const [isLoaded, setIsLoaded] = useState(false);
+ useEffect(() => {
+   dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+ }, [dispatch]);
 
-  return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-         <Switch>
-         <Route exact path='/spots/:spotId/review'>
-           <CreateAReview />
+
+ return (
+   <>
+     <Navigation isLoaded={isLoaded} />
+     {isLoaded && (
+        <Switch>
+        <Route exact path='/spots/:spotId/review'>
+          <CreateAReview />
+        </Route>
+        <Route exact path='/'>
+          <AllSpots />
+        </Route>
+        <Route exact path='/spots/:spotId/update'>
+          <UpdateSpot />
+        </Route>
+        <Route exact path='/api/spots/:spotId'>
+          <SpotDetails />
+        </Route>
+        <Route exact path='/spots/new'>
+          <CreateSpot />
+        </Route>
+        <Route exact path='/spots/:spotId/reviews'>
+          <ReviewsForSpot />
+        </Route>
+        <Route exact path='/bookings'>
+           <SessionBookings/>
          </Route>
-         <Route exact path='/'>
-           <AllSpots />
-         </Route>
-         <Route exact path='/spots/:spotId/update'>
-           <UpdateSpot />
-         </Route>
-         <Route exact path='/api/spots/:spotId'>
-           <SpotDetails />
-         </Route>
-         <Route exact path='/spots/new'>
-           <CreateSpot />
-         </Route>
-         <Route exact path='/spots/:spotId/reviews'>
-           <ReviewsForSpot />
-         </Route>
-         <Route exact path='/bookings'>
-            <SessionBookings/>
-          </Route>
-       </Switch>
-      )}
-    </>
-  );
+      </Switch>
+     )}
+   </>
+ );
 }
+
 
 export default App;

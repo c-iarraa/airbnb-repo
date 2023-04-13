@@ -1,91 +1,93 @@
-/* #root {
-    margin: 0 auto;
-    width: 1024px;
-    padding-top: 20px;
-    grid-template-columns: repeat(auto-fill, 330px);
-} */
-
 .detailsDiv {
     width: 1024px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-}
+ }
 
-.description {
+
+ .description {
     color: black;
     display: flex;
     flex-direction: column;
-}
+ }
 
-.description2 {
+
+ .description2 {
     margin-top: 0px;
 
-}
 
-.specific-spot-img {
+ }
+
+
+ .specific-spot-img {
     border-radius: 20px;
-    /* justify-content: center; */
     width: 1000px;
-    /* height: 500px; */
-    /* display: flex; */
-    /* position: relative; */
     overflow: hidden;
-    /* width: 100%; */
-}
+ }
 
-.above-img {
+
+ .above-img {
     display: flex;
     flex-direction: column;
-}
+ }
 
-.self-checkin {
+
+ .self-checkin {
     margin: 30px 0px 0px
-}
+ }
 
-.checkin-text {
+
+ .checkin-text {
     color: rgb(120,120,120);
     font-family: 'Geneva, Verdana, sans-serif';
     margin: 5px 12px 0px
-}
+ }
 
-.owner-superhost {
+
+ .owner-superhost {
     margin: 35px 0px 0px
-}
+ }
 
-.superhost-text {
+
+ .superhost-text {
     color: rgb(120,120,120);
     font-family: 'Geneva, Verdana, sans-serif';
     margin: 5px 12px 0px
-}
+ }
 
-.below-img {
+
+ .below-img {
     border-bottom: 1px solid rgb(211,211,211);
-}
+ }
 
-.hosts-description {
+
+ .hosts-description {
     margin: 25px 0px 0px
-}
+ }
 
-.house-deets {
+
+ .house-deets {
     margin: 5px 0px 30px;
     width: 50%
-}
+ }
 
-.basic-info {
+
+ .basic-info {
     border-bottom: 1px solid rgb(211,211,211);
-}
+ }
 
-.cancellation {
+
+ .cancellation {
     margin: 35px 0px 0px
-}
+ }
 
-.review-button {
+
+ .review-button {
     width: 125px;
     color: black;
     display: flex;
     flex-direction: flex-start;
-    /* margin-top: 10px; */
     border: 1px solid black;
     border-radius: 5px;
     font-size: 15px;
@@ -93,18 +95,22 @@
     margin-left: 55px;
     padding-left: 7px;
     background-color: rgb(240,240,240);
-}
+ }
 
 
-.spot-reviews {
+
+
+ .spot-reviews {
     margin: 0px -40px 0px
-}
+ }
 
-.update-delete-div {
+
+ .update-delete-div {
     display : flex;
-}
+ }
 
-.info-card {
+
+ .info-card {
     display: block;
     background-color: white;
     border: 1px solid black;
@@ -117,78 +123,84 @@
     margin: 20px;
     margin-top: -300px;
     float: right;
-    /* position: sticky;
-    height: fit-content;
-    text-align: center;
-    border-radius: 12px;
-    width: 300px;
-    margin-top: 49px;
-    padding: 15px;
-    border: 1px solid rgb(221, 221, 221);
-    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px; */
-}
 
-.star-rating {
+
+ }
+
+
+ .star-rating {
     float: right;
     padding-right: 10px;
     font-size: 18px;
 
-}
 
-.price {
+ }
+
+
+ .price {
     float: left;
     padding-left: 10px;
     font-size: 20px;
-}
+ }
 
-.fee-info {
+
+ .fee-info {
     padding-top: -12px;
-}
+ }
 
-.stay-price1 {
+
+ .stay-price1 {
     padding-top: 100px;
     padding-left: 10px;
     font-size: 14px;
     justify-content: flex-start;
     text-decoration: underline;
-}
+ }
 
-.cleaning-fee {
+
+ .cleaning-fee {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding-left: 10px;
     padding-right: 10px;
-}
+ }
 
-.cleaning-fee1 {
+
+ .cleaning-fee1 {
     font-size: 15px;
     text-decoration: underline;
-}
+ }
 
-.cleaning-fee2 {
+
+ .cleaning-fee2 {
     font-size: 15px;
-}
+ }
 
-.service-fee {
+
+ .service-fee {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding-left: 10px;
     padding-right: 10px;
 
-}
 
-.service-fee1 {
+ }
+
+
+ .service-fee1 {
     font-size: 15px;
     text-decoration: underline;
-}
+ }
 
-.service-fee2 {
+
+ .service-fee2 {
     font-size: 15px;
-}
+ }
 
-.update-button2 {
+
+ .update-button2 {
     width: 50%;
     color: black;
     width: 93px;
@@ -198,126 +210,152 @@
     border: 1px solid black;
     border-radius: 3px;
     font-size: 13px;
-}
+ }
 
-.update-text {
+
+ .update-text {
     padding: 5px;
     padding-left: 7px;
     padding-right: 7px;
     padding-top: 3px;
     padding-bottom: 3px;
     background-color: rgb(240,240,240)
-}
+ }
 
-.delete-button2 {
+
+ .delete-button2 {
     width: 50%;
     color: black;
     width: 300px;
     display: flex;
     flex-direction: flex-start;
     margin-top: 4px;
-}
+ }
 
-.update-delete-div {
+
+ .update-delete-div {
     margin-top: 40px;
     margin-left: -100px;
     padding-left: 180px;
-}
+ }
 
-.aircover1 {
+
+ .aircover1 {
     height: 24px
-}
+ }
 
-.aircover-text {
+
+ .aircover-text {
     padding-top: -20px;
     width: 55%
-}
+ }
 
-.aircover-text2 {
+
+ .aircover-text2 {
     text-decoration:  underline;
-}
+ }
 
-.aircover {
+
+ .aircover {
     border-bottom: 1px solid rgb(211,211,211);
-}
+ }
 
-.fa-user {
+
+ .fa-user {
     border: 0.5px solid rgb(221,221,221);
     padding: 10px;
     border-radius: 30px;
     background-color: rgb(221,221,221);
-}
+ }
 
-.review-user {
+
+ .review-user {
     font-size: 17px;
-}
+ }
 
-.user-review {
+
+ .user-review {
     grid-gap: 1rem;
     row-gap: 60px;
     column-gap: 10px;
-}
+ }
 
-.review-spot {
+
+ .review-spot {
     border-bottom: 1px solid rgb(211,211,211);
-}
+ }
 
-.booking-form{
+
+ .booking-form{
     padding: 0;
     display: flex;
-    position: relative;
-}
+ }
 
-.date-fields{
+
+ .date-fields{
     display: flex;
     justify-content: center;
     border: rgb(176,176,176) solid 1px;
-    border-radius: 15px;
-}
+    border-radius: 5px;
+    position: relative;
+    bottom: 25px;
+    left: 20px;
+    height: 50px;
+ }
 
-.calenderinputone{
-    width: 135px;
+
+ .calenderinputone{
+    width: 110px;
     border: 0 transparent;
-}
+    font-family: Geneva, Verdana, sans-serif;
+ }
 
-.calenderinputtwo{
-    width: 135px;
+
+ .calenderinputtwo{
+    width: 110px;
     padding-left: 2px;
     border: 0 transparent;
     border-left: rgb(176,176,176) solid 1px;
-}
+    font-family: Geneva, Verdana, sans-serif;
+ }
 
-.submit-booking-details{
+
+ .submit-booking-details{
     padding-top: 15px;
     position: relative;
-}
+ }
 
-.submit-button-booking{
+
+ .submit-button-booking{
     border: transparent;
-    width: 192px;
-    height: 48px;
+    /* width: 192px; */
+    width: 206px;
+    height: 35px;
     border-radius: 5px;
     background-color: #E00B41;
     color:white;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif ;
-    /* top: 50px; */
-}
+    font-family: Geneva, Verdana, sans-serif;
+    position:relative;
+    top: 30px;
+    right: 195px;
+ }
 
-.booking-div {
-    /* position: absolute; */
-    height: fit-content;
-    /* text-align: center; */
-    /* border-radius: 12px; */
+
+ .booking-div {
+    /* height: fit-content;
     width: 300px;
-    /* margin-top: 49px; */
     margin-top: -25px;
     padding: 15px;
-    right: 200px;
-    /* border: 1px solid rgb(221, 221, 221); */
-    /* box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px; */
-    /* display: flex; */
-    /* flex-direction: row; */
     position: absolute;
-    display: flex;
+    display: flex; */
+    position: absolute;
+    height: fit-content;
+    text-align: center;
+    border-radius: 12px;
+    width: 200px;
+    padding: 15px;
+    left: 900px;
+ }
 
-}
+
+

@@ -7,270 +7,317 @@ import { postBookingThunk } from '../../store/booking'
 import './SpotDetails.css';
 
 
+
+
 const SpotDetails = () => {
-    const { spotId } = useParams();
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const spotSelector = useSelector(state => state.spots.oneSpot);
-    const sessionId = useSelector(state => state.session.user?.id) //session user id
-    const review = useSelector(state => state.reviews.reviewList);
-    const sessionUser = useSelector(state => state.session.user)
-    const currentSession = useSelector(state => state)
-    const [startDate, setStartDate] = useState('')
-    const [endDate, setEndDate] = useState('')
-    const [validationErrors, setValidationErrors] = useState([]);
-    const [errors, setErrors] = useState([])
+   const { spotId } = useParams();
+   const dispatch = useDispatch();
+   const history = useHistory();
+   const spotSelector = useSelector(state => state.spots.oneSpot);
+   const sessionId = useSelector(state => state.session.user?.id) //session user id
+   const review = useSelector(state => state.reviews.reviewList);
+   const sessionUser = useSelector(state => state.session.user)
+   const currentSession = useSelector(state => state)
+   const [startDate, setStartDate] = useState('')
+   const [endDate, setEndDate] = useState('')
+   const [validationErrors, setValidationErrors] = useState([]);
+   const [errors, setErrors] = useState([])
 
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const dataErrors = [];
-
-        if (!sessionUser) dataErrors.push('Must be signed in to book')
-        if (sessionUser && sessionUser.id === spotSelector.ownerId) dataErrors.push("Can't book your own spot")
 
 
-        const splitStart = startDate.split('-')
-        const splitEnd = endDate.split('-')
-
-        const startYear = Number(splitStart[0])
-        const startMonth = Number(splitStart[1])
-        const startDay = Number(splitStart[2])
-
-        const endYear = Number(splitEnd[0])
-        const endMonth = Number(splitEnd[1])
-        const endDay = Number(splitEnd[2])
-
-        if (endYear < startYear) dataErrors.push("End date can't be before start date")
-        if (endMonth < startMonth) dataErrors.push("End date can't be before start date")
-        if (endDay <= startDay) dataErrors.push("End date can't be before or on the  start date")
-
-        if (dataErrors.length) {
-            setErrors(dataErrors)
-        } else {
-
-            const bookingData = {
-                startDate,
-                endDate
-            }
+   const handleSubmit = async (e) => {
+       e.preventDefault();
+       const dataErrors = [];
 
 
-            const postBooking = await dispatch(postBookingThunk(spotId, bookingData)).catch(
-                async (res) => {
-                    const data = await res.json()
-                    if (data && data.errors) setErrors(Object.values(data.errors))
-                    // console.log('#$&(*#@&$*(32', Object.values(data.errors))
-                }
-            )
-
-            if (postBooking) {
-                history.push('/bookings')
-            }
-        }
-    }
+       if (!sessionUser) dataErrors.push('Must be signed in to book')
+       if (sessionUser && sessionUser.id === spotSelector.ownerId) dataErrors.push("Can't book your own spot")
 
 
-    useEffect(() => {
-        dispatch(getSpot(spotId))
+
+
+       const splitStart = startDate.split('-')
+       const splitEnd = endDate.split('-')
+
+
+       const startYear = Number(splitStart[0])
+       const startMonth = Number(splitStart[1])
+       const startDay = Number(splitStart[2])
+
+
+       const endYear = Number(splitEnd[0])
+       const endMonth = Number(splitEnd[1])
+       const endDay = Number(splitEnd[2])
+
+
+       if (endYear < startYear) dataErrors.push("End date can't be before start date")
+       if (endMonth < startMonth) dataErrors.push("End date can't be before start date")
+       if (endDay <= startDay) dataErrors.push("End date can't be before or on the  start date")
+
+
+       if (dataErrors.length) {
+           setErrors(dataErrors)
+       } else {
+
+
+           const bookingData = {
+               startDate,
+               endDate
+           }
+
+
+
+
+           const postBooking = await dispatch(postBookingThunk(spotId, bookingData)).catch(
+               async (res) => {
+                   const data = await res.json()
+                   if (data && data.errors) setErrors(Object.values(data.errors))
+                   // console.log('#$&(*#@&$*(32', Object.values(data.errors))
+               }
+           )
+
+
+           if (postBooking) {
+               history.push('/bookings')
+           }
+       }
+   }
+
+
+
+
+   useEffect(() => {
+       dispatch(getSpot(spotId))
+  }, [spotId, dispatch]);
+
+
+   useEffect(() => {
+       dispatch(getReviews(spotId))
    }, [spotId, dispatch]);
 
-    useEffect(() => {
-        dispatch(getReviews(spotId))
-    }, [spotId, dispatch]);
-
-
-
-    if (!spotSelector.SpotImages) return null;
-
-    const deleteSpecificSpot = async (e) => {
-        e.preventDefault();
-        await dispatch(deleteSpot(spotId))
-        history.push('/')
-    }
-
-    const CreateReview = async (e) => {
-
-        e.preventDefault();
-        await dispatch(createReview(spotId))
-        history.push('/${spotId}')
-    }
-
-    // const deleteReview = (e) => {
-    //     e.preventDefault()
-    //     return dispatch(deleteReview(usersReview.id))
-    //     // history.push('/')
-    //     // return dispatch(deleteReview(review.id))
-
-    // }
 
 
 
 
-      return review &&(
-        <nav>
-            <div className='detailsDiv'>
-            <ul className="review-errors">
-                {validationErrors.map((error) => (
-                    <li key={error}>{error}</li>
-                ))}
-            </ul>
-            <div className='above-img'>
-                <h1 className='description' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{spotSelector.description}</h1>
-                <h4 className='description2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i> {spotSelector.avgStarRating} · {spotSelector.numReviews} reviews · Superhost · {spotSelector.city}, {spotSelector.state}, {spotSelector.country}</h4>
-                </div>
-                <div className='image-container'>
-                    {spotSelector.SpotImages.map((image) => (
-                        <img className="specific-spot-img" key={image.id} src={image.url}/>
-                    ))}
-                </div>
-                <div className='house-description'>
-                    <div className='below-img'>
-                        <h3 className='hosts-description' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}> Entire house hosted by Blaze and Ryder </h3>
-                        <h4 className='house-deets'style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><small> 8 guests · 4 bedrooms · 7 beds · 2.5 baths </small></h4>
-                    </div>
-                    <div className='basic-info'>
-                    <div className='Check-in'>
-                        <h4 className='self-checkin' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-solid fa-door-open fa-xl"></i> Self check-in</h4>
-                        <h4 className='checkin-text' style={{color: 'rgb(120,120,120)', fontFamily: 'Geneva, Verdana, sans-serif'}}><small> Check yourself in with the lockbox.</small></h4>
-                    </div>
-                    <div className='superhost'>
-                        <h4 className='owner-superhost'style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-solid fa-medal fa-xl"></i> Blaze and Ryder are Superhosts</h4>
-                        <h4 className='superhost-text' style={{color: 'rgb(120,120,120)', fontFamily: 'Geneva, Verdana, sans-serif'}}><small> Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</small></h4>
-                    </div>
-                    <div className='cancellation'>
-                        <h4 style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-regular fa-calendar fa-xl"></i> Free cancellation for 48 hours.</h4>
-                    </div>
 
-                    <div className='info-card'>
-                        <h1 className='star-rating' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i> {spotSelector.avgStarRating}</h1>
-                        <h1 className='price' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>${spotSelector.price} a night</h1>
-                            <div className='review-features-div'>
-                                {(spotSelector.ownerId !== sessionId) &&
-                                <div>
-                                    <div className='review-button'>
-                                        <NavLink className='review-text' to={`/spots/${spotId}/review`} style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}}>Create A Review</NavLink>
-                                    </div>
-                                </div>
-                                }
-                            </div>
-                            <div className='update-delete-div'>
-                                {(spotSelector.ownerId === sessionId) &&
-                                <div>
-                                    <div className='update-button2'>
-                                        <NavLink className='update-text' style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}} to={`/spots/${spotSelector.id}/update`}>Update Spot</NavLink>
-                                    </div>
-                                    <div className='delete-button2'>
-                                        <button onClick={deleteSpecificSpot} style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Delete Spot</button>
-                                    </div>
-                                </div>
-                                }
-                            </div>
+   if (!spotSelector.SpotImages) return null;
 
 
-                            <div className='booking-div'>
-                                {sessionUser &&
-                                <form className='booking-form' onSubmit={handleSubmit} method="post">
-                                        <ul>
-                                            {errors.map((error, idx) => (
-                                                <li key={idx}>{error}</li>
-                                            ))}
-                                        </ul>
-                                    <div className='date-fields'>
-                                        <div>
-                                            <input
-                                                className='calenderinputone'
-                                                type='date'
-                                                required
-                                                onChange={(e) => setStartDate(e.target.value)}
-                                                value={startDate}
-                                                min={new Date().toISOString().split('T')[0]}
-
-                                            />
-                                        </div>
-                                        <div>
-
-                                            <input
-                                                className='calenderinputtwo'
-                                                required
-                                                type='date'
-                                                onChange={(e) => setEndDate(e.target.value)}
-                                                value={endDate}
-                                                min={new Date().toISOString().split('T')[0]}
-
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className='submit-booking-details'><button type='submit' className='submit-button-booking'>Reserve</button></div>
-
-                                </form>
-                                }
-                            </div>
+   const deleteSpecificSpot = async (e) => {
+       e.preventDefault();
+       await dispatch(deleteSpot(spotId))
+       history.push('/')
+   }
 
 
-                            <div className='fee-info'>
-                                <div className='stay-price'>
-                                    <h1 className='stay-price1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>${spotSelector.price} x 5 nights</h1>
-                                </div>
-                                <div className='cleaning-fee'>
-                                    <h1 className='cleaning-fee1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Cleaning fee</h1>
-                                    <h1 className='cleaning-fee2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>$60</h1>
-                                </div>
-                                <div className='service-fee'>
-                                    <h1 className='service-fee1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Service fee</h1>
-                                    <h1 className='service-fee2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>$120</h1>
-                                </div>
-                            </div>
-                    </div>
-                    </div>
-                    <div className='aircover'>
-                        <h2 className='aircover-img'>
-                            <img className="aircover1" src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg" alt="AirCover"/>
-                        </h2>
-                        <h4 className='aircover-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><small>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</small></h4>
-                        <h4 className='aircover-text2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Learn more</h4>
-                    </div>
-                </div>
-                <div className='review-stuff'>
-                <div>
-                    <h2 className='reviews-tag' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Reviews</h2>
-                </div>
-                <ul className="spot-reviews">
-                    {review.length ? review?.map(review => (
-
-                            <div className = 'review-values' key={review.id}>
-                                <div className='review-spot'>
-                                <div className='user-review'>
-                                    <h3 className='review-user' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-solid fa-user"></i> {review.User.firstName} {review.User.lastName}</h3>
-                                </div>
-                                <h4 className='review-stars' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i> {review.stars}</h4>
-                                <h3 className='review-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{review.review}</h3>
-                                <div className = 'delete-review-button'>
-                                    {(review?.userId === sessionId) &&
-                                            <div>
-                                                <button onClick={
-                                                    async (e) => {
-                                                    e.preventDefault();
+   const CreateReview = async (e) => {
 
 
-                                                    return dispatch(deleteReview(review.id))
-                                                    .then (() => history.push(`/`))
-                                                }
-                                            }
-                                                >Delete Review</button>
-                                            </div>
-                                    }
-                                </div>
-                                </div>
-                            </div>
-                        ))
-                        : <div style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Be the first to create a review!</div>
-                    }
-                </ul>
-            </div>
-            </div>
-        </nav>
-        )
-    }
+       e.preventDefault();
+       await dispatch(createReview(spotId))
+       history.push('/${spotId}')
+   }
+
+
+   // const deleteReview = (e) => {
+   //     e.preventDefault()
+   //     return dispatch(deleteReview(usersReview.id))
+   //     // history.push('/')
+   //     // return dispatch(deleteReview(review.id))
+
+
+   // }
+
+
+
+
+
+
+
+
+     return review &&(
+       <nav>
+           <div className='detailsDiv'>
+           <ul className="review-errors">
+               {validationErrors.map((error) => (
+                   <li key={error}>{error}</li>
+               ))}
+           </ul>
+           <div className='above-img'>
+               <h1 className='description' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{spotSelector.description}</h1>
+               <h4 className='description2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i> {spotSelector.avgStarRating} · {spotSelector.numReviews} reviews · Superhost · {spotSelector.city}, {spotSelector.state}, {spotSelector.country}</h4>
+               </div>
+               <div className='image-container'>
+                   {spotSelector.SpotImages.map((image) => (
+                       <img className="specific-spot-img" key={image.id} src={image.url}/>
+                   ))}
+               </div>
+               <div className='house-description'>
+                   <div className='below-img'>
+                       <h3 className='hosts-description' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}> Entire house hosted by Blaze and Ryder </h3>
+                       <h4 className='house-deets'style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><small> 8 guests · 4 bedrooms · 7 beds · 2.5 baths </small></h4>
+                   </div>
+                   <div className='basic-info'>
+                   <div className='Check-in'>
+                       <h4 className='self-checkin' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-solid fa-door-open fa-xl"></i> Self check-in</h4>
+                       <h4 className='checkin-text' style={{color: 'rgb(120,120,120)', fontFamily: 'Geneva, Verdana, sans-serif'}}><small> Check yourself in with the lockbox.</small></h4>
+                   </div>
+                   <div className='superhost'>
+                       <h4 className='owner-superhost'style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-solid fa-medal fa-xl"></i> Blaze and Ryder are Superhosts</h4>
+                       <h4 className='superhost-text' style={{color: 'rgb(120,120,120)', fontFamily: 'Geneva, Verdana, sans-serif'}}><small> Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</small></h4>
+                   </div>
+                   <div className='cancellation'>
+                       <h4 style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-regular fa-calendar fa-xl"></i> Free cancellation for 48 hours.</h4>
+                   </div>
+
+
+                   <div className='info-card'>
+                       <h1 className='star-rating' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i> {spotSelector.avgStarRating}</h1>
+                       <h1 className='price' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>${spotSelector.price} a night</h1>
+                           <div className='review-features-div'>
+                               {(spotSelector.ownerId !== sessionId) &&
+                               <div>
+                                   <div className='review-button'>
+                                       <NavLink className='review-text' to={`/spots/${spotId}/review`} style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}}>Create A Review</NavLink>
+                                   </div>
+                               </div>
+                               }
+                           </div>
+                           <div className='update-delete-div'>
+                               {(spotSelector.ownerId === sessionId) &&
+                               <div>
+                                   <div className='update-button2'>
+                                       <NavLink className='update-text' style={{color: 'black', fontFamily: 'Geneva, Verdana, sans-serif'}} to={`/spots/${spotSelector.id}/update`}>Update Spot</NavLink>
+                                   </div>
+                                   <div className='delete-button2'>
+                                       <button onClick={deleteSpecificSpot} style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Delete Spot</button>
+                                   </div>
+                               </div>
+                               }
+                           </div>
+
+
+
+
+                           <div className='booking-div'>
+                               {sessionUser &&
+                               <form className='booking-form' onSubmit={handleSubmit} method="post">
+                                       <ul>
+                                           {errors.map((error, idx) => (
+                                               <li key={idx}>{error}</li>
+                                           ))}
+                                       </ul>
+                                   <div className='date-fields'>
+                                       <div>
+                                           <input
+                                               className='calenderinputone'
+                                               type='date'
+                                               required
+                                               onChange={(e) => setStartDate(e.target.value)}
+                                               value={startDate}
+                                               min={new Date().toISOString().split('T')[0]}
+
+
+                                           />
+                                       </div>
+                                       <div>
+
+
+                                           <input
+                                               className='calenderinputtwo'
+                                               required
+                                               type='date'
+                                               onChange={(e) => setEndDate(e.target.value)}
+                                               value={endDate}
+                                               min={new Date().toISOString().split('T')[0]}
+
+
+                                           />
+                                       </div>
+                                   </div>
+
+
+                                   <div className='submit-booking-details'><button type='submit' className='submit-button-booking'>Reserve</button></div>
+
+
+                               </form>
+                               }
+                           </div>
+
+
+
+
+                           <div className='fee-info'>
+                               <div className='stay-price'>
+                                   <h1 className='stay-price1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>${spotSelector.price} x 5 nights</h1>
+                               </div>
+                               <div className='cleaning-fee'>
+                                   <h1 className='cleaning-fee1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Cleaning fee</h1>
+                                   <h1 className='cleaning-fee2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>$60</h1>
+                               </div>
+                               <div className='service-fee'>
+                                   <h1 className='service-fee1' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Service fee</h1>
+                                   <h1 className='service-fee2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>$120</h1>
+                               </div>
+                           </div>
+                   </div>
+                   </div>
+                   <div className='aircover'>
+                       <h2 className='aircover-img'>
+                           <img className="aircover1" src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg" alt="AirCover"/>
+                       </h2>
+                       <h4 className='aircover-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><small>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</small></h4>
+                       <h4 className='aircover-text2' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Learn more</h4>
+                   </div>
+               </div>
+               <div className='review-stuff'>
+               <div>
+                   <h2 className='reviews-tag' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Reviews</h2>
+               </div>
+               <ul className="spot-reviews">
+                   {review.length ? review?.map(review => (
+
+
+                           <div className = 'review-values' key={review.id}>
+                               <div className='review-spot'>
+                               <div className='user-review'>
+                                   <h3 className='review-user' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-solid fa-user"></i> {review.User.firstName} {review.User.lastName}</h3>
+                               </div>
+                               <h4 className='review-stars' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}><i class="fa-sharp fa-solid fa-star"></i> {review.stars}</h4>
+                               <h3 className='review-text' style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>{review.review}</h3>
+                               <div className = 'delete-review-button'>
+                                   {(review?.userId === sessionId) &&
+                                           <div>
+                                               <button onClick={
+                                                   async (e) => {
+                                                   e.preventDefault();
+
+
+
+
+                                                   return dispatch(deleteReview(review.id))
+                                                   .then (() => history.push(`/`))
+                                               }
+                                           }
+                                               >Delete Review</button>
+                                           </div>
+                                   }
+                               </div>
+                               </div>
+                           </div>
+                       ))
+                       : <div style={{fontFamily: 'Geneva, Verdana, sans-serif'}}>Be the first to create a review!</div>
+                   }
+               </ul>
+           </div>
+           </div>
+       </nav>
+       )
+   }
+
 
 export default SpotDetails;
+
+
+
