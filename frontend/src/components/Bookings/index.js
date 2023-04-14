@@ -168,7 +168,7 @@ const SessionBookings = () => {
            <div className='all-bookings'>
                {pastBookings.map(booking => (
                    <div className='bookingCard'>
-                       <div><img className='image-booking' src={booking.SpotImage.url}></img></div>
+                       <div><img className='image-booking' src={booking.Spot.previewImage}></img></div>
                        <div className='booking-city-date'>
                            <div className='city-booking-title'>{booking.Spot.city}, {booking.Spot.state}</div>
                            <div className='date-booking'>{splitDate(booking.startDate)}</div>
@@ -186,6 +186,3 @@ const SessionBookings = () => {
 
 
 export default SessionBookings
-
-
-
